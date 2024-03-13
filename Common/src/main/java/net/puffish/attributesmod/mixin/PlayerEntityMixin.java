@@ -31,6 +31,9 @@ public abstract class PlayerEntityMixin {
 				.add(AttributesMod.JUMP)
 				.add(AttributesMod.RESISTANCE)
 				.add(AttributesMod.MINING_SPEED)
+				.add(AttributesMod.PICKAXE_SPEED)
+				.add(AttributesMod.AXE_SPEED)
+				.add(AttributesMod.SHOVEL_SPEED)
 				.add(AttributesMod.SPRINTING_SPEED)
 				.add(AttributesMod.KNOCKBACK);
 	}
