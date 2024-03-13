@@ -1,0 +1,29 @@
+{
+	"schemaVersion": 1,
+	"id": "puffish_attributes",
+	"version": "${version}",
+	"name": "Pufferfish's Attributes",
+	"description": "Adds more attributes to the game.",
+	"authors": [
+		"Pufferfish"
+	],
+	"license": "LGPL-3.0",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.puffish.attributesmod.main.FabricMain"
+		]
+	},
+	"mixins": [
+		"puffish_attributes.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.6",
+		"fabric-api": "*",
+		"minecraft": "~1.20.4",
+		"java": ">=17"
+	},
+	"breaks": {
+		"puffish_skills": "<0.12.0"
+	}
+}
