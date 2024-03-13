@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[2,)"
+license="LGPL-3.0"
+
+[[mixins]]
+config = "puffish_attributes.mixins.json"
+
+[[mods]]
+modId="puffish_attributes"
+version="${version}"
+displayName="Pufferfish's Attributes"
+authors="Pufferfish"
+description="Adds more attributes to the game."
+
+[[dependencies.puffish_attributes]]
+modId="neoforge"
+type="required"
+versionRange="[20.4,)"
+
+[[dependencies.puffish_attributes]]
+modId="minecraft"
+type="required"
+versionRange="[1.20.4,1.21)"
+
+[[dependencies.puffish_attributes]]
+modId="puffish_skills"
+type="incompatible"
+versionRange="(,0.12.0)"
