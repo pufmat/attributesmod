@@ -25,7 +25,7 @@ dependencies {
 }
 
 loom {
-    mixin.useLegacyMixinAp = false
+    mixin.defaultRefmapName.set("puffish_attributes-refmap.json")
 }
 
 tasks.check {
