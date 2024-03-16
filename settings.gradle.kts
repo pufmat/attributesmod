@@ -14,4 +14,4 @@ plugins {
 
 rootProject.name = "Pufferfish's Attributes"
 
-include("Common", "Fabric", "NeoForge")
+include("Common", "Fabric", "Forge")
