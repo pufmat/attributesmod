@@ -2,8 +2,8 @@ package net.puffish.attributesmod.mixin;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.ProjectileDamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.tag.DamageTypeTags;
 import net.puffish.attributesmod.AttributesMod;
 import net.puffish.attributesmod.util.Sign;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,7 +27,7 @@ public abstract class LivingEntityMixin {
 		}
 
 		if (source.getAttacker() instanceof PlayerEntity player) {
-			if (source.isIn(DamageTypeTags.IS_PROJECTILE)) {
+			if (source instanceof ProjectileDamageSource) {
 				damage = (float) AttributesMod.applyAttributeModifiers(
 						damage,
 						Sign.POSITIVE.wrap(player.getAttributeInstance(AttributesMod.RANGED_DAMAGE))
