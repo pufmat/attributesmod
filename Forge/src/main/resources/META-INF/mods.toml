@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[45,)"
+loaderVersion="[43,)"
 license="LGPL-3.0"
 
 [[mods]]
@@ -12,9 +12,9 @@ description="Adds more attributes to the game."
 [[dependencies.puffish_attributes]]
 modId="forge"
 mandatory=true
-versionRange="[45,)"
+versionRange="[43,)"
 
 [[dependencies.puffish_attributes]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.19.4,1.20)"
+versionRange="[1.19.2,1.20)"
