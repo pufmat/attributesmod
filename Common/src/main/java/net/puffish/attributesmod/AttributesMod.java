@@ -145,7 +145,7 @@ public class AttributesMod {
 
 	public static EntityAttribute createClampedAttribute(Identifier id, double fallback, double min, double max) {
 		return new ClampedEntityAttribute(
-				id.toTranslationKey("attribute"),
+				"attribute." + id.getNamespace() + "." + id.getPath(),
 				fallback,
 				min,
 				max
@@ -154,7 +154,7 @@ public class AttributesMod {
 
 	public static EntityAttribute createDynamicAttribute(Identifier id, double min, double max) {
 		return new DynamicEntityAttribute(
-				id.toTranslationKey("attribute"),
+				"attribute." + id.getNamespace() + "." + id.getPath(),
 				min,
 				max
 		);
