@@ -7,6 +7,9 @@
 	"attribute.puffish_attributes.player.jump": "Skok",
 	"attribute.puffish_attributes.player.resistance": "Odporność",
 	"attribute.puffish_attributes.player.mining_speed": "Prędkość kopania",
+	"attribute.puffish_attributes.player.pickaxe_speed": "Prędkość kilofa",
+	"attribute.puffish_attributes.player.axe_speed": "Prędkość siekiery",
+	"attribute.puffish_attributes.player.shovel_speed": "Prędkość łopaty",
 	"attribute.puffish_attributes.player.sprinting_speed": "Prędkość biegania",
 	"attribute.puffish_attributes.player.knockback": "Odrzut"
 }
