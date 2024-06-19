@@ -29,7 +29,7 @@ public abstract class ApplyBonusLootFunctionMixin {
 			ordinal = 0
 	)
 	private int modifyVariableAtProcess(int value, ItemStack itemStack, LootContext context) {
-		if (enchantment.value() == Enchantments.FORTUNE && context.get(LootContextParameters.THIS_ENTITY) instanceof PlayerEntity player) {
+		if (enchantment.matchesKey(Enchantments.FORTUNE) && context.get(LootContextParameters.THIS_ENTITY) instanceof PlayerEntity player) {
 			var fortune = AttributesMod.applyAttributeModifiers(
 					value,
 					Sign.POSITIVE.wrap(player.getAttributeInstance(AttributesMod.FORTUNE))

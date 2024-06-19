@@ -9,7 +9,7 @@ pluginManagement {
 }
 
 plugins {
-    id("dev.architectury.loom") version "1.5.388" apply false
+    id("dev.architectury.loom") version "1.6.397" apply false
 }
 
 rootProject.name = "Pufferfish's Attributes"

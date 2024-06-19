@@ -14,13 +14,16 @@ group = "${project.properties["maven_group"]}"
 evaluationDependsOn(":Common")
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 dependencies {
 	minecraft("com.mojang:minecraft:${project.properties["minecraft_version"]}")
-	mappings("net.fabricmc:yarn:${project.properties["yarn_mappings"]}:v2")
+	mappings(loom.layered {
+		mappings("net.fabricmc:yarn:${project.properties["yarn_mappings"]}:v2")
+		mappings("dev.architectury:yarn-mappings-patch-neoforge:${project.properties["yarn_mappings_patch"]}")
+	})
 
 	neoForge("net.neoforged:neoforge:${project.properties["neoforge_version"]}")
 
@@ -39,7 +42,7 @@ tasks.processResources {
 	from(project(":Common").sourceSets.main.get().resources)
 
 	inputs.property("version", project.properties["mod_version"])
-	filesMatching("META-INF/mods.toml") {
+	filesMatching("META-INF/neoforge.mods.toml") {
 		expand(mapOf("version" to project.properties["mod_version"]))
 	}
 }

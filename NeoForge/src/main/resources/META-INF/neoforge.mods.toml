@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[2,)"
+loaderVersion="[1,)"
 license="LGPL-3.0"
 
 [[mixins]]
@@ -15,12 +15,12 @@ description="Adds more attributes to the game."
 [[dependencies.puffish_attributes]]
 modId="neoforge"
 type="required"
-versionRange="[20.4,)"
+versionRange="[21.0.0-beta,)"
 
 [[dependencies.puffish_attributes]]
 modId="minecraft"
 type="required"
-versionRange="[1.20.4,1.21)"
+versionRange="[1.21,1.21.1)"
 
 [[dependencies.puffish_attributes]]
 modId="puffish_skills"

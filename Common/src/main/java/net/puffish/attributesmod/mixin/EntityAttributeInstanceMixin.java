@@ -2,6 +2,7 @@ package net.puffish.attributesmod.mixin;
 
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.puffish.attributesmod.attribute.DynamicEntityAttribute;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class EntityAttributeInstanceMixin {
 	@Shadow
 	@Final
-	private EntityAttribute type;
+	private RegistryEntry<EntityAttribute> type;
 
 	@Inject(
 			method = "getBaseValue",
@@ -23,7 +24,7 @@ public class EntityAttributeInstanceMixin {
 			cancellable = true
 	)
 	private void injectAtGetBaseValue(CallbackInfoReturnable<Double> cir) {
-		if (type instanceof DynamicEntityAttribute) {
+		if (type.value() instanceof DynamicEntityAttribute) {
 			cir.setReturnValue(Double.NaN);
 		}
 	}
@@ -34,7 +35,7 @@ public class EntityAttributeInstanceMixin {
 			cancellable = true
 	)
 	private void injectAtComputeValue(CallbackInfoReturnable<Double> cir) {
-		if (type instanceof DynamicEntityAttribute) {
+		if (type.value() instanceof DynamicEntityAttribute) {
 			cir.setReturnValue(Double.NaN);
 		}
 	}
@@ -45,7 +46,7 @@ public class EntityAttributeInstanceMixin {
 			cancellable = true
 	)
 	private void injectAtSetBaseValue(double baseValue, CallbackInfo ci) {
-		if (type instanceof DynamicEntityAttribute) {
+		if (type.value() instanceof DynamicEntityAttribute) {
 			ci.cancel();
 		}
 	}

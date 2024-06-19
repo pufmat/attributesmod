@@ -5,10 +5,11 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.puffish.attributesmod.attribute.DynamicEntityAttribute;
 import net.puffish.attributesmod.mixin.EntityAttributeInstanceInvoker;
-import net.puffish.attributesmod.util.Registrar;
+import net.puffish.attributesmod.util.Platform;
 import net.puffish.attributesmod.util.Signed;
 
 public class AttributesMod {
@@ -16,136 +17,153 @@ public class AttributesMod {
 
 	public static final Identifier STAMINA_ID
 			= AttributesMod.createAttributeIdentifier("player", "stamina");
-	public static final EntityAttribute STAMINA = createClampedAttribute(
+	public static final RegistryEntry<EntityAttribute> STAMINA = registerAttribute(
 			STAMINA_ID,
-			4.0,
-			0.0,
-			1024.0
-	).setTracked(true);
+			createClampedAttribute(
+					STAMINA_ID,
+					4.0,
+					0.0,
+					1024.0
+			).setTracked(true)
+	);
 
 	public static final Identifier MELEE_DAMAGE_ID
 			= AttributesMod.createAttributeIdentifier("player", "melee_damage");
-	public static final EntityAttribute MELEE_DAMAGE = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> MELEE_DAMAGE = registerAttribute(
 			MELEE_DAMAGE_ID,
-			0.0,
-			Double.MAX_VALUE
+			createDynamicAttribute(
+					MELEE_DAMAGE_ID,
+					0.0,
+					Double.MAX_VALUE
+			)
 	);
 
 	public static final Identifier RANGED_DAMAGE_ID
 			= AttributesMod.createAttributeIdentifier("player", "ranged_damage");
-	public static final EntityAttribute RANGED_DAMAGE = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> RANGED_DAMAGE = registerAttribute(
 			RANGED_DAMAGE_ID,
-			0.0,
-			Double.MAX_VALUE
-	);
+			createDynamicAttribute(
+					RANGED_DAMAGE_ID,
+					0.0,
+					Double.MAX_VALUE
+			));
 
 	public static final Identifier FORTUNE_ID
 			= AttributesMod.createAttributeIdentifier("player", "fortune");
-	public static final EntityAttribute FORTUNE = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> FORTUNE = registerAttribute(
 			FORTUNE_ID,
-			0.0,
-			Double.MAX_VALUE
-	);
+			createDynamicAttribute(
+					FORTUNE_ID,
+					0.0,
+					Double.MAX_VALUE
+			));
 
 	public static final Identifier HEALING_ID
 			= AttributesMod.createAttributeIdentifier("player", "healing");
-	public static final EntityAttribute HEALING = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> HEALING = registerAttribute(
 			HEALING_ID,
-			0.0,
-			Double.MAX_VALUE
-	).setTracked(true);
+			createDynamicAttribute(
+					HEALING_ID,
+					0.0,
+					Double.MAX_VALUE
+			).setTracked(true));
 
 	public static final Identifier JUMP_ID
 			= AttributesMod.createAttributeIdentifier("player", "jump");
-	public static final EntityAttribute JUMP = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> JUMP = registerAttribute(
 			JUMP_ID,
-			0.0,
-			Double.MAX_VALUE
-	).setTracked(true);
+			createDynamicAttribute(
+					JUMP_ID,
+					0.0,
+					Double.MAX_VALUE
+			).setTracked(true));
 
 	public static final Identifier RESISTANCE_ID
 			= AttributesMod.createAttributeIdentifier("player", "resistance");
-	public static final EntityAttribute RESISTANCE = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> RESISTANCE = registerAttribute(
 			RESISTANCE_ID,
-			0.0,
-			Double.MAX_VALUE
-	);
+			createDynamicAttribute(
+					RESISTANCE_ID,
+					0.0,
+					Double.MAX_VALUE
+			));
 
 	public static final Identifier MINING_SPEED_ID
 			= AttributesMod.createAttributeIdentifier("player", "mining_speed");
-	public static final EntityAttribute MINING_SPEED = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> MINING_SPEED = registerAttribute(
 			MINING_SPEED_ID,
-			0.0,
-			Double.MAX_VALUE
-	).setTracked(true);
+			createDynamicAttribute(
+					MINING_SPEED_ID,
+					0.0,
+					Double.MAX_VALUE
+			).setTracked(true));
 
 	public static final Identifier PICKAXE_SPEED_ID
 			= AttributesMod.createAttributeIdentifier("player", "pickaxe_speed");
-	public static final EntityAttribute PICKAXE_SPEED = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> PICKAXE_SPEED = registerAttribute(
 			PICKAXE_SPEED_ID,
-			0.0,
-			Double.MAX_VALUE
-	).setTracked(true);
+			createDynamicAttribute(
+					PICKAXE_SPEED_ID,
+					0.0,
+					Double.MAX_VALUE
+			).setTracked(true));
 
 	public static final Identifier AXE_SPEED_ID
 			= AttributesMod.createAttributeIdentifier("player", "axe_speed");
-	public static final EntityAttribute AXE_SPEED = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> AXE_SPEED = registerAttribute(
 			AXE_SPEED_ID,
-			0.0,
-			Double.MAX_VALUE
-	).setTracked(true);
+			createDynamicAttribute(
+					AXE_SPEED_ID,
+					0.0,
+					Double.MAX_VALUE
+			).setTracked(true));
 
 	public static final Identifier SHOVEL_SPEED_ID
 			= AttributesMod.createAttributeIdentifier("player", "shovel_speed");
-	public static final EntityAttribute SHOVEL_SPEED = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> SHOVEL_SPEED = registerAttribute(
 			SHOVEL_SPEED_ID,
-			0.0,
-			Double.MAX_VALUE
-	).setTracked(true);
+			createDynamicAttribute(
+					SHOVEL_SPEED_ID,
+					0.0,
+					Double.MAX_VALUE
+			).setTracked(true));
 
 	public static final Identifier SPRINTING_SPEED_ID
 			= AttributesMod.createAttributeIdentifier("player", "sprinting_speed");
-	public static final EntityAttribute SPRINTING_SPEED = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> SPRINTING_SPEED = registerAttribute(
 			SPRINTING_SPEED_ID,
-			0.0,
-			Double.MAX_VALUE
-	).setTracked(true);
+			createDynamicAttribute(
+					SPRINTING_SPEED_ID,
+					0.0,
+					Double.MAX_VALUE
+			).setTracked(true));
 
 	public static final Identifier KNOCKBACK_ID
 			= AttributesMod.createAttributeIdentifier("player", "knockback");
-	public static final EntityAttribute KNOCKBACK = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> KNOCKBACK = registerAttribute(
 			KNOCKBACK_ID,
-			0.0,
-			Double.MAX_VALUE
-	).setTracked(true);
+			createDynamicAttribute(
+					KNOCKBACK_ID,
+					0.0,
+					Double.MAX_VALUE
+			).setTracked(true));
 
 	public static final Identifier REPAIR_COST_ID
 			= AttributesMod.createAttributeIdentifier("player", "repair_cost");
-	public static final EntityAttribute REPAIR_COST = createDynamicAttribute(
+	public static final RegistryEntry<EntityAttribute> REPAIR_COST = registerAttribute(
 			REPAIR_COST_ID,
-			0.0,
-			Double.MAX_VALUE
-	).setTracked(true);
+			createDynamicAttribute(
+					REPAIR_COST_ID,
+					0.0,
+					Double.MAX_VALUE
+			).setTracked(true));
 
-	public static void setup(Registrar registrar) {
-		registrar.register(Registries.ATTRIBUTE, STAMINA_ID, STAMINA);
-		registrar.register(Registries.ATTRIBUTE, MELEE_DAMAGE_ID, MELEE_DAMAGE);
-		registrar.register(Registries.ATTRIBUTE, RANGED_DAMAGE_ID, RANGED_DAMAGE);
-		registrar.register(Registries.ATTRIBUTE, FORTUNE_ID, FORTUNE);
-		registrar.register(Registries.ATTRIBUTE, HEALING_ID, HEALING);
-		registrar.register(Registries.ATTRIBUTE, JUMP_ID, JUMP);
-		registrar.register(Registries.ATTRIBUTE, RESISTANCE_ID, RESISTANCE);
-		registrar.register(Registries.ATTRIBUTE, MINING_SPEED_ID, MINING_SPEED);
-		registrar.register(Registries.ATTRIBUTE, PICKAXE_SPEED_ID, PICKAXE_SPEED);
-		registrar.register(Registries.ATTRIBUTE, AXE_SPEED_ID, AXE_SPEED);
-		registrar.register(Registries.ATTRIBUTE, SHOVEL_SPEED_ID, SHOVEL_SPEED);
-		registrar.register(Registries.ATTRIBUTE, SPRINTING_SPEED_ID, SPRINTING_SPEED);
-		registrar.register(Registries.ATTRIBUTE, KNOCKBACK_ID, KNOCKBACK);
-		registrar.register(Registries.ATTRIBUTE, REPAIR_COST_ID, REPAIR_COST);
+	public static void setup() {
+
 	}
 
 	public static Identifier createIdentifier(String path) {
-		return new Identifier(MOD_ID, path);
+		return Identifier.of(MOD_ID, path);
 	}
 
 	public static Identifier createAttributeIdentifier(String type, String name) {
@@ -169,6 +187,10 @@ public class AttributesMod {
 		);
 	}
 
+	public static RegistryEntry<EntityAttribute> registerAttribute(Identifier id, EntityAttribute attribute) {
+		return Platform.INSTANCE.registerReference(Registries.ATTRIBUTE, id, attribute);
+	}
+
 	@SafeVarargs
 	public static double applyAttributeModifiers(
 			double initial,
@@ -176,11 +198,11 @@ public class AttributesMod {
 	) {
 		for (var signedAttribute : attributes) {
 			for (var modifier : ((EntityAttributeInstanceInvoker) signedAttribute.value())
-					.invokeGetModifiersByOperation(EntityAttributeModifier.Operation.ADDITION)
+					.invokeGetModifiersByOperation(EntityAttributeModifier.Operation.ADD_VALUE)
 			) {
 				switch (signedAttribute.sign()) {
-					case POSITIVE -> initial += modifier.getValue();
-					case NEGATIVE -> initial -= modifier.getValue();
+					case POSITIVE -> initial += modifier.value();
+					case NEGATIVE -> initial -= modifier.value();
 					default -> throw new IllegalStateException();
 				}
 			}
@@ -188,28 +210,28 @@ public class AttributesMod {
 		double result = initial;
 		for (var signedAttribute : attributes) {
 			for (var modifier : ((EntityAttributeInstanceInvoker) signedAttribute.value())
-					.invokeGetModifiersByOperation(EntityAttributeModifier.Operation.MULTIPLY_BASE)
+					.invokeGetModifiersByOperation(EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
 			) {
 				switch (signedAttribute.sign()) {
-					case POSITIVE -> result += initial * modifier.getValue();
-					case NEGATIVE -> result -= initial * modifier.getValue();
+					case POSITIVE -> result += initial * modifier.value();
+					case NEGATIVE -> result -= initial * modifier.value();
 					default -> throw new IllegalStateException();
 				}
 			}
 		}
 		for (var signedAttribute : attributes) {
 			for (var modifier : ((EntityAttributeInstanceInvoker) signedAttribute.value())
-					.invokeGetModifiersByOperation(EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+					.invokeGetModifiersByOperation(EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
 			) {
 				switch (signedAttribute.sign()) {
-					case POSITIVE -> result *= 1.0 + modifier.getValue();
-					case NEGATIVE -> result *= 1.0 - modifier.getValue();
+					case POSITIVE -> result *= 1.0 + modifier.value();
+					case NEGATIVE -> result *= 1.0 - modifier.value();
 					default -> throw new IllegalStateException();
 				}
 			}
 		}
 		for (var signedAttribute : attributes) {
-			result = signedAttribute.value().getAttribute().clamp(result);
+			result = signedAttribute.value().getAttribute().value().clamp(result);
 		}
 		return result;
 	}

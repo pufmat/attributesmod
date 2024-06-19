@@ -44,7 +44,7 @@ public abstract class PlayerEntityMixin {
 			method = "attack",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/enchantment/EnchantmentHelper;onTargetDamaged(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/Entity;)V"
+					target = "Lnet/minecraft/enchantment/EnchantmentHelper;onTargetDamaged(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/damage/DamageSource;)V"
 			)
 	)
 	private void injectAtAttack(Entity target, CallbackInfo ci) {
