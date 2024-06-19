@@ -6,6 +6,7 @@
 	"mixins": [
 		"ApplyBonusLootFunctionMixin",
 		"EntityAttributeInstanceInvoker",
+		"EntityAttributeInstanceMixin",
 		"HungerManagerMixin",
 		"LivingEntityMixin",
 		"PlayerEntityMixin",
