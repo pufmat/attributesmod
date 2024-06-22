@@ -1,5 +1,6 @@
 package net.puffish.attributesmod.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.ProjectileDamageSource;
@@ -8,9 +9,7 @@ import net.puffish.attributesmod.AttributesMod;
 import net.puffish.attributesmod.util.Sign;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -60,21 +59,22 @@ public abstract class LivingEntityMixin {
 					Sign.POSITIVE.wrap(player.getAttributeInstance(AttributesMod.HEALING))
 			);
 		}
+
 		return amount;
 	}
 
-	@Inject(
+	@ModifyReturnValue(
 			method = "getJumpVelocity",
-			at = @At("RETURN"),
-			cancellable = true
+			at = @At("RETURN")
 	)
-	private void injectAtGetJumpVelocity(CallbackInfoReturnable<Float> cir) {
+	private float injectAtGetJumpVelocity(float jump) {
 		if (((LivingEntity) (Object) this) instanceof PlayerEntity player) {
-			cir.setReturnValue((float) AttributesMod.applyAttributeModifiers(
-					cir.getReturnValueF(),
+			return  (float) AttributesMod.applyAttributeModifiers(
+					jump,
 					Sign.POSITIVE.wrap(player.getAttributeInstance(AttributesMod.JUMP))
-			));
+			);
 		}
+		return jump;
 	}
 
 	@ModifyVariable(
@@ -92,17 +92,17 @@ public abstract class LivingEntityMixin {
 		return reduction;
 	}
 
-	@Inject(
+	@ModifyReturnValue(
 			method = "modifyAppliedDamage",
-			at = @At("TAIL"),
-			cancellable = true
+			at = @At("TAIL")
 	)
-	private void injectAtModifyAppliedDamage(CallbackInfoReturnable<Float> cir) {
-		if (((LivingEntity) (Object) this) instanceof PlayerEntity player && cir.getReturnValueF() < Float.MAX_VALUE / 3.0f) {
-			cir.setReturnValue(Math.max(0.0f, (float) AttributesMod.applyAttributeModifiers(
-					cir.getReturnValueF(),
+	private float injectAtModifyAppliedDamage(float damage) {
+		if (((LivingEntity) (Object) this) instanceof PlayerEntity player && damage < Float.MAX_VALUE / 3.0f) {
+			return Math.max(0.0f, (float) AttributesMod.applyAttributeModifiers(
+					damage,
 					Sign.NEGATIVE.wrap(player.getAttributeInstance(AttributesMod.RESISTANCE))
-			)));
+			));
 		}
+		return damage;
 	}
 }

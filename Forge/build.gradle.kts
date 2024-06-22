@@ -20,6 +20,11 @@ dependencies {
 
 	forge("net.minecraftforge:forge:${project.properties["minecraft_version"]}-${project.properties["forge_version"]}")
 
+	compileOnly("io.github.llamalad7:mixinextras-common:${project.properties["mixinextras_version"]}")
+	annotationProcessor("io.github.llamalad7:mixinextras-common:${project.properties["mixinextras_version"]}")
+	implementation("io.github.llamalad7:mixinextras-forge:${project.properties["mixinextras_version"]}")
+	include("io.github.llamalad7:mixinextras-forge:${project.properties["mixinextras_version"]}")
+
 	implementation(project(path = ":Common", configuration = "namedElements"))
 }
 
