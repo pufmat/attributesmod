@@ -19,6 +19,7 @@ dependencies {
     mappings("net.fabricmc:yarn:${project.properties["yarn_mappings"]}:v2")
 
     compileOnly("net.fabricmc:sponge-mixin:${project.properties["mixin_version"]}")
+    compileOnly("io.github.llamalad7:mixinextras-common:${project.properties["mixinextras_version"]}")
 }
 
 tasks.jar {
