@@ -1,5 +1,6 @@
 package net.puffish.attributesmod.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -64,16 +65,18 @@ public abstract class PlayerEntityMixin {
 		}
 	}
 
-	@Inject(method = "getMovementSpeed()F", at = @At("RETURN"), cancellable = true)
-	private void injectAtGetMovementSpeed(CallbackInfoReturnable<Float> cir) {
+	@ModifyReturnValue(method = "getMovementSpeed()F", at = @At("RETURN"))
+	private float injectAtGetMovementSpeed(float speed) {
 		var player = (PlayerEntity) (Object) this;
 
-		if (player.isSprinting()) {
-			cir.setReturnValue((float) AttributesMod.applyAttributeModifiers(
-					cir.getReturnValueF(),
-					Sign.POSITIVE.wrap(player.getAttributeInstance(AttributesMod.SPRINTING_SPEED))
-			));
+		if (!player.isSprinting()) {
+			return speed;
 		}
+
+		return (float) AttributesMod.applyAttributeModifiers(
+				speed,
+				Sign.POSITIVE.wrap(player.getAttributeInstance(AttributesMod.SPRINTING_SPEED))
+		);
 	}
 
 }
