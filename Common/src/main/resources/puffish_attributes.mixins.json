@@ -4,6 +4,7 @@
 	"package": "net.puffish.attributesmod.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
+		"AnvilScreenHandlerMixin",
 		"ApplyBonusLootFunctionMixin",
 		"EntityAttributeInstanceInvoker",
 		"EntityAttributeInstanceMixin",
