@@ -11,5 +11,6 @@
 	"attribute.puffish_attributes.player.axe_speed": "Axe Speed",
 	"attribute.puffish_attributes.player.shovel_speed": "Shovel Speed",
 	"attribute.puffish_attributes.player.sprinting_speed": "Sprinting Speed",
-	"attribute.puffish_attributes.player.knockback": "Knockback"
+	"attribute.puffish_attributes.player.knockback": "Knockback",
+	"attribute.puffish_attributes.player.repair_cost": "Repair Cost"
 }
