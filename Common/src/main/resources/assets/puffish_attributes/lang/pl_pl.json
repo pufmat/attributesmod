@@ -11,5 +11,6 @@
 	"attribute.puffish_attributes.player.axe_speed": "Prędkość siekiery",
 	"attribute.puffish_attributes.player.shovel_speed": "Prędkość łopaty",
 	"attribute.puffish_attributes.player.sprinting_speed": "Prędkość biegania",
-	"attribute.puffish_attributes.player.knockback": "Odrzut"
+	"attribute.puffish_attributes.player.knockback": "Odrzut",
+	"attribute.puffish_attributes.player.repair_cost": "Koszt naprawy"
 }

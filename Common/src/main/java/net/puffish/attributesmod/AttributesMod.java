@@ -119,6 +119,14 @@ public class AttributesMod {
 			Double.MAX_VALUE
 	).setTracked(true);
 
+	public static final Identifier REPAIR_COST_ID
+			= AttributesMod.createAttributeIdentifier("player", "repair_cost");
+	public static final EntityAttribute REPAIR_COST = createDynamicAttribute(
+			REPAIR_COST_ID,
+			0.0,
+			Double.MAX_VALUE
+	).setTracked(true);
+
 	public static void setup(Registrar registrar) {
 		registrar.register(Registry.ATTRIBUTE, STAMINA_ID, STAMINA);
 		registrar.register(Registry.ATTRIBUTE, MELEE_DAMAGE_ID, MELEE_DAMAGE);
@@ -133,6 +141,7 @@ public class AttributesMod {
 		registrar.register(Registry.ATTRIBUTE, SHOVEL_SPEED_ID, SHOVEL_SPEED);
 		registrar.register(Registry.ATTRIBUTE, SPRINTING_SPEED_ID, SPRINTING_SPEED);
 		registrar.register(Registry.ATTRIBUTE, KNOCKBACK_ID, KNOCKBACK);
+		registrar.register(Registry.ATTRIBUTE, REPAIR_COST_ID, REPAIR_COST);
 	}
 
 	public static Identifier createIdentifier(String path) {
