@@ -36,7 +36,8 @@ public abstract class PlayerEntityMixin {
 				.add(AttributesMod.AXE_SPEED)
 				.add(AttributesMod.SHOVEL_SPEED)
 				.add(AttributesMod.SPRINTING_SPEED)
-				.add(AttributesMod.KNOCKBACK);
+				.add(AttributesMod.KNOCKBACK)
+				.add(AttributesMod.REPAIR_COST);
 	}
 
 	@Inject(
