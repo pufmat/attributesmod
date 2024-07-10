@@ -1,7 +1,7 @@
 {
 	"attribute.puffish_attributes.player.stamina": "지구력",
-	"attribute.puffish_attributes.player.melee_damage": "근접 피해",
-	"attribute.puffish_attributes.player.ranged_damage": "원거리 피해",
+	"attribute.puffish_attributes.player.melee_damage": "근접 공격 피해",
+	"attribute.puffish_attributes.player.ranged_damage": "원거리 공격 피해",
 	"attribute.puffish_attributes.player.fortune": "행운",
 	"attribute.puffish_attributes.player.healing": "치유",
 	"attribute.puffish_attributes.player.jump": "점프",
