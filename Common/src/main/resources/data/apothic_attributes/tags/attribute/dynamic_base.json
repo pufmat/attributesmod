@@ -1,0 +1,17 @@
+{
+	"values": [
+		"puffish_attributes:player.melee_damage",
+		"puffish_attributes:player.ranged_damage",
+		"puffish_attributes:player.fortune",
+		"puffish_attributes:player.healing",
+		"puffish_attributes:player.jump",
+		"puffish_attributes:player.resistance",
+		"puffish_attributes:player.mining_speed",
+		"puffish_attributes:player.pickaxe_speed",
+		"puffish_attributes:player.axe_speed",
+		"puffish_attributes:player.shovel_speed",
+		"puffish_attributes:player.sprinting_speed",
+		"puffish_attributes:player.knockback",
+		"puffish_attributes:player.repair_cost"
+	]
+}
