@@ -31,21 +31,21 @@ public class AttributesMod {
 			= AttributesMod.createAttributeIdentifier("player", "melee_damage");
 	public static final RegistryEntry<EntityAttribute> MELEE_DAMAGE = registerAttribute(
 			MELEE_DAMAGE_ID,
-			createDynamicAttribute(MELEE_DAMAGE_ID)
+			createDynamicAttribute(MELEE_DAMAGE_ID).setTracked(true)
 	);
 
 	public static final Identifier RANGED_DAMAGE_ID
 			= AttributesMod.createAttributeIdentifier("player", "ranged_damage");
 	public static final RegistryEntry<EntityAttribute> RANGED_DAMAGE = registerAttribute(
 			RANGED_DAMAGE_ID,
-			createDynamicAttribute(RANGED_DAMAGE_ID)
+			createDynamicAttribute(RANGED_DAMAGE_ID).setTracked(true)
 	);
 
 	public static final Identifier FORTUNE_ID
 			= AttributesMod.createAttributeIdentifier("player", "fortune");
 	public static final RegistryEntry<EntityAttribute> FORTUNE = registerAttribute(
 			FORTUNE_ID,
-			createDynamicAttribute(FORTUNE_ID)
+			createDynamicAttribute(FORTUNE_ID).setTracked(true)
 	);
 
 	public static final Identifier HEALING_ID
@@ -66,7 +66,7 @@ public class AttributesMod {
 			= AttributesMod.createAttributeIdentifier("player", "resistance");
 	public static final RegistryEntry<EntityAttribute> RESISTANCE = registerAttribute(
 			RESISTANCE_ID,
-			createDynamicAttribute(RESISTANCE_ID)
+			createDynamicAttribute(RESISTANCE_ID).setTracked(true)
 	);
 
 	public static final Identifier MINING_SPEED_ID
