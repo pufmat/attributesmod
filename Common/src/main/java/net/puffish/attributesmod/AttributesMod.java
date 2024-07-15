@@ -27,19 +27,19 @@ public class AttributesMod {
 			= AttributesMod.createAttributeIdentifier("player", "melee_damage");
 	public static final EntityAttribute MELEE_DAMAGE = createDynamicAttribute(
 			MELEE_DAMAGE_ID
-	);
+	).setTracked(true);
 
 	public static final Identifier RANGED_DAMAGE_ID
 			= AttributesMod.createAttributeIdentifier("player", "ranged_damage");
 	public static final EntityAttribute RANGED_DAMAGE = createDynamicAttribute(
 			RANGED_DAMAGE_ID
-	);
+	).setTracked(true);
 
 	public static final Identifier FORTUNE_ID
 			= AttributesMod.createAttributeIdentifier("player", "fortune");
 	public static final EntityAttribute FORTUNE = createDynamicAttribute(
 			FORTUNE_ID
-	);
+	).setTracked(true);
 
 	public static final Identifier HEALING_ID
 			= AttributesMod.createAttributeIdentifier("player", "healing");
@@ -57,7 +57,7 @@ public class AttributesMod {
 			= AttributesMod.createAttributeIdentifier("player", "resistance");
 	public static final EntityAttribute RESISTANCE = createDynamicAttribute(
 			RESISTANCE_ID
-	);
+	).setTracked(true);
 
 	public static final Identifier MINING_SPEED_ID
 			= AttributesMod.createAttributeIdentifier("player", "mining_speed");
