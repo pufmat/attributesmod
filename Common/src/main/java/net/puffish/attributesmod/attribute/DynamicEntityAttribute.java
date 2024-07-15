@@ -1,9 +1,9 @@
 package net.puffish.attributesmod.attribute;
 
-import net.minecraft.entity.attribute.ClampedEntityAttribute;
+import net.minecraft.entity.attribute.EntityAttribute;
 
-public class DynamicEntityAttribute extends ClampedEntityAttribute {
-	public DynamicEntityAttribute(String translationKey, double min, double max) {
-		super(translationKey, Double.NaN, min, max);
+public class DynamicEntityAttribute extends EntityAttribute {
+	public DynamicEntityAttribute(String translationKey) {
+		super(translationKey, Double.NaN);
 	}
 }
