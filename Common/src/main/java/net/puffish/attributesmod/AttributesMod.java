@@ -26,105 +26,79 @@ public class AttributesMod {
 	public static final Identifier MELEE_DAMAGE_ID
 			= AttributesMod.createAttributeIdentifier("player", "melee_damage");
 	public static final EntityAttribute MELEE_DAMAGE = createDynamicAttribute(
-			MELEE_DAMAGE_ID,
-			0.0,
-			Double.MAX_VALUE
+			MELEE_DAMAGE_ID
 	);
 
 	public static final Identifier RANGED_DAMAGE_ID
 			= AttributesMod.createAttributeIdentifier("player", "ranged_damage");
 	public static final EntityAttribute RANGED_DAMAGE = createDynamicAttribute(
-			RANGED_DAMAGE_ID,
-			0.0,
-			Double.MAX_VALUE
+			RANGED_DAMAGE_ID
 	);
 
 	public static final Identifier FORTUNE_ID
 			= AttributesMod.createAttributeIdentifier("player", "fortune");
 	public static final EntityAttribute FORTUNE = createDynamicAttribute(
-			FORTUNE_ID,
-			0.0,
-			Double.MAX_VALUE
+			FORTUNE_ID
 	);
 
 	public static final Identifier HEALING_ID
 			= AttributesMod.createAttributeIdentifier("player", "healing");
 	public static final EntityAttribute HEALING = createDynamicAttribute(
-			HEALING_ID,
-			0.0,
-			Double.MAX_VALUE
+			HEALING_ID
 	).setTracked(true);
 
 	public static final Identifier JUMP_ID
 			= AttributesMod.createAttributeIdentifier("player", "jump");
 	public static final EntityAttribute JUMP = createDynamicAttribute(
-			JUMP_ID,
-			0.0,
-			Double.MAX_VALUE
+			JUMP_ID
 	).setTracked(true);
 
 	public static final Identifier RESISTANCE_ID
 			= AttributesMod.createAttributeIdentifier("player", "resistance");
 	public static final EntityAttribute RESISTANCE = createDynamicAttribute(
-			RESISTANCE_ID,
-			0.0,
-			Double.MAX_VALUE
+			RESISTANCE_ID
 	);
 
 	public static final Identifier MINING_SPEED_ID
 			= AttributesMod.createAttributeIdentifier("player", "mining_speed");
 	public static final EntityAttribute MINING_SPEED = createDynamicAttribute(
-			MINING_SPEED_ID,
-			0.0,
-			Double.MAX_VALUE
+			MINING_SPEED_ID
 	).setTracked(true);
 
 	public static final Identifier PICKAXE_SPEED_ID
 			= AttributesMod.createAttributeIdentifier("player", "pickaxe_speed");
 	public static final EntityAttribute PICKAXE_SPEED = createDynamicAttribute(
-			PICKAXE_SPEED_ID,
-			0.0,
-			Double.MAX_VALUE
+			PICKAXE_SPEED_ID
 	).setTracked(true);
 
 	public static final Identifier AXE_SPEED_ID
 			= AttributesMod.createAttributeIdentifier("player", "axe_speed");
 	public static final EntityAttribute AXE_SPEED = createDynamicAttribute(
-			AXE_SPEED_ID,
-			0.0,
-			Double.MAX_VALUE
+			AXE_SPEED_ID
 	).setTracked(true);
 
 	public static final Identifier SHOVEL_SPEED_ID
 			= AttributesMod.createAttributeIdentifier("player", "shovel_speed");
 	public static final EntityAttribute SHOVEL_SPEED = createDynamicAttribute(
-			SHOVEL_SPEED_ID,
-			0.0,
-			Double.MAX_VALUE
+			SHOVEL_SPEED_ID
 	).setTracked(true);
 
 	public static final Identifier SPRINTING_SPEED_ID
 			= AttributesMod.createAttributeIdentifier("player", "sprinting_speed");
 	public static final EntityAttribute SPRINTING_SPEED = createDynamicAttribute(
-			SPRINTING_SPEED_ID,
-			0.0,
-			Double.MAX_VALUE
+			SPRINTING_SPEED_ID
 	).setTracked(true);
 
 	public static final Identifier KNOCKBACK_ID
 			= AttributesMod.createAttributeIdentifier("player", "knockback");
 	public static final EntityAttribute KNOCKBACK = createDynamicAttribute(
-			KNOCKBACK_ID,
-			0.0,
-			Double.MAX_VALUE
+			KNOCKBACK_ID
 	).setTracked(true);
 
 	public static final Identifier REPAIR_COST_ID
 			= AttributesMod.createAttributeIdentifier("player", "repair_cost");
 	public static final EntityAttribute REPAIR_COST = createDynamicAttribute(
-			REPAIR_COST_ID,
-			0.0,
-			Double.MAX_VALUE
+			REPAIR_COST_ID
 	).setTracked(true);
 
 	public static void setup(Registrar registrar) {
@@ -161,11 +135,9 @@ public class AttributesMod {
 		);
 	}
 
-	public static EntityAttribute createDynamicAttribute(Identifier id, double min, double max) {
+	public static EntityAttribute createDynamicAttribute(Identifier id) {
 		return new DynamicEntityAttribute(
-				"attribute." + id.getNamespace() + "." + id.getPath(),
-				min,
-				max
+				"attribute." + id.getNamespace() + "." + id.getPath()
 		);
 	}
 
