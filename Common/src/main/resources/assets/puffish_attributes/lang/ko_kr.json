@@ -1,0 +1,16 @@
+{
+	"attribute.puffish_attributes.player.stamina": "지구력",
+	"attribute.puffish_attributes.player.melee_damage": "근접 공격 피해",
+	"attribute.puffish_attributes.player.ranged_damage": "원거리 공격 피해",
+	"attribute.puffish_attributes.player.fortune": "행운",
+	"attribute.puffish_attributes.player.healing": "치유",
+	"attribute.puffish_attributes.player.jump": "점프",
+	"attribute.puffish_attributes.player.resistance": "저항",
+	"attribute.puffish_attributes.player.mining_speed": "채굴 속도",
+	"attribute.puffish_attributes.player.pickaxe_speed": "곡괭이 속도",
+	"attribute.puffish_attributes.player.axe_speed": "도끼 속도",
+	"attribute.puffish_attributes.player.shovel_speed": "삽 속도",
+	"attribute.puffish_attributes.player.sprinting_speed": "달리기 속도",
+	"attribute.puffish_attributes.player.knockback": "밀치기",
+	"attribute.puffish_attributes.player.repair_cost": "수리 비용"
+}
