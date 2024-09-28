@@ -26,8 +26,9 @@ public abstract class PlayerEntityMixin {
 		cir.getReturnValue()
 				.add(AttributesMod.STAMINA)
 				.add(AttributesMod.FORTUNE)
-				.add(AttributesMod.RANGED_DAMAGE)
+				.add(AttributesMod.MAGIC_DAMAGE)
 				.add(AttributesMod.MELEE_DAMAGE)
+				.add(AttributesMod.RANGED_DAMAGE)
 				.add(AttributesMod.HEALING)
 				.add(AttributesMod.JUMP)
 				.add(AttributesMod.RESISTANCE)
@@ -37,7 +38,9 @@ public abstract class PlayerEntityMixin {
 				.add(AttributesMod.SHOVEL_SPEED)
 				.add(AttributesMod.SPRINTING_SPEED)
 				.add(AttributesMod.KNOCKBACK)
-				.add(AttributesMod.REPAIR_COST);
+				.add(AttributesMod.REPAIR_COST)
+				.add(AttributesMod.ARMOR_SHRED)
+				.add(AttributesMod.TOUGHNESS_SHRED);
 	}
 
 	@Inject(

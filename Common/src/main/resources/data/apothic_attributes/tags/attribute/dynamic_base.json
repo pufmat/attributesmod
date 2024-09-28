@@ -1,5 +1,6 @@
 {
 	"values": [
+		"puffish_attributes:player.magic_damage",
 		"puffish_attributes:player.melee_damage",
 		"puffish_attributes:player.ranged_damage",
 		"puffish_attributes:player.fortune",
@@ -12,6 +13,8 @@
 		"puffish_attributes:player.shovel_speed",
 		"puffish_attributes:player.sprinting_speed",
 		"puffish_attributes:player.knockback",
-		"puffish_attributes:player.repair_cost"
+		"puffish_attributes:player.repair_cost",
+		"puffish_attributes:player.armor_shred",
+		"puffish_attributes:player.toughness_shred"
 	]
 }

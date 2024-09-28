@@ -27,6 +27,13 @@ public class AttributesMod {
 			).setTracked(true)
 	);
 
+	public static final Identifier MAGIC_DAMAGE_ID
+			= AttributesMod.createAttributeIdentifier("player", "magic_damage");
+	public static final RegistryEntry<EntityAttribute> MAGIC_DAMAGE = registerAttribute(
+			MAGIC_DAMAGE_ID,
+			createDynamicAttribute(MAGIC_DAMAGE_ID).setTracked(true)
+	);
+
 	public static final Identifier MELEE_DAMAGE_ID
 			= AttributesMod.createAttributeIdentifier("player", "melee_damage");
 	public static final RegistryEntry<EntityAttribute> MELEE_DAMAGE = registerAttribute(
@@ -116,6 +123,20 @@ public class AttributesMod {
 	public static final RegistryEntry<EntityAttribute> REPAIR_COST = registerAttribute(
 			REPAIR_COST_ID,
 			createDynamicAttribute(REPAIR_COST_ID).setTracked(true)
+	);
+
+	public static final Identifier ARMOR_SHRED_ID
+			= AttributesMod.createAttributeIdentifier("player", "armor_shred");
+	public static final RegistryEntry<EntityAttribute> ARMOR_SHRED = registerAttribute(
+			ARMOR_SHRED_ID,
+			createDynamicAttribute(ARMOR_SHRED_ID).setTracked(true)
+	);
+
+	public static final Identifier TOUGHNESS_SHRED_ID
+			= AttributesMod.createAttributeIdentifier("player", "toughness_shred");
+	public static final RegistryEntry<EntityAttribute> TOUGHNESS_SHRED = registerAttribute(
+			TOUGHNESS_SHRED_ID,
+			createDynamicAttribute(TOUGHNESS_SHRED_ID).setTracked(true)
 	);
 
 	public static void setup() {
