@@ -87,6 +87,22 @@ public abstract class LivingEntityMixin {
 		return toughness;
 	}
 
+	@ModifyArg(
+			method = "modifyAppliedDamage",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/DamageUtil;getInflictedDamage(FF)F"),
+			index = 1
+	)
+	private float modifyArgAtModifyAppliedDamage(float protection, @Local(argsOnly = true) DamageSource source) {
+		if (source.getAttacker() instanceof PlayerEntity player) {
+			protection = Math.max(0.0f, (float) AttributesMod.applyAttributeModifiers(
+					protection,
+					Sign.NEGATIVE.wrap(player.getAttributeInstance(AttributesMod.PROTECTION_SHRED))
+			));
+		}
+
+		return protection;
+	}
+
 	@ModifyVariable(
 			method = "heal",
 			at = @At("HEAD"),

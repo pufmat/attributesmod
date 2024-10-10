@@ -160,6 +160,13 @@ public class AttributesMod {
 			createDynamicAttribute(TOUGHNESS_SHRED_ID).setTracked(true)
 	);
 
+	public static final Identifier PROTECTION_SHRED_ID
+			= AttributesMod.createAttributeIdentifier("player", "protection_shred");
+	public static final RegistryEntry<EntityAttribute> PROTECTION_SHRED = registerAttribute(
+			PROTECTION_SHRED_ID,
+			createDynamicAttribute(PROTECTION_SHRED_ID).setTracked(true)
+	);
+
 	public static void setup() {
 
 	}

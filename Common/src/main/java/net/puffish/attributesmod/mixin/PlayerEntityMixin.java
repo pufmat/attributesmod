@@ -43,7 +43,8 @@ public abstract class PlayerEntityMixin {
 				.add(AttributesMod.KNOCKBACK)
 				.add(AttributesMod.REPAIR_COST)
 				.add(AttributesMod.ARMOR_SHRED)
-				.add(AttributesMod.TOUGHNESS_SHRED);
+				.add(AttributesMod.TOUGHNESS_SHRED)
+				.add(AttributesMod.PROTECTION_SHRED);
 	}
 
 	@Inject(

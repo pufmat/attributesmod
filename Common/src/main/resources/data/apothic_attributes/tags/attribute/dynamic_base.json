@@ -18,6 +18,7 @@
 		"puffish_attributes:player.knockback",
 		"puffish_attributes:player.repair_cost",
 		"puffish_attributes:player.armor_shred",
-		"puffish_attributes:player.toughness_shred"
+		"puffish_attributes:player.toughness_shred",
+		"puffish_attributes:player.protection_shred"
 	]
 }
