@@ -141,11 +141,25 @@ public abstract class LivingEntityMixin {
 			method = "modifyAppliedDamage",
 			at = @At("TAIL")
 	)
-	private float injectAtModifyAppliedDamage(float damage) {
+	private float injectAtModifyAppliedDamage(float damage, @Local(argsOnly = true) DamageSource source) {
 		if (((LivingEntity) (Object) this) instanceof PlayerEntity player && damage < Float.MAX_VALUE / 3.0f) {
+			var attributes = new ArrayList<Signed<EntityAttributeInstance>>();
+
+			attributes.add(Sign.NEGATIVE.wrap(player.getAttributeInstance(AttributesMod.RESISTANCE)));
+
+			if (source.isOf(DamageTypes.MAGIC)) {
+				attributes.add(Sign.NEGATIVE.wrap(player.getAttributeInstance(AttributesMod.MAGIC_RESISTANCE)));
+			}
+
+			if (source.isIn(DamageTypeTags.IS_PROJECTILE)) {
+				attributes.add(Sign.NEGATIVE.wrap(player.getAttributeInstance(AttributesMod.MAGIC_RESISTANCE)));
+			} else {
+				attributes.add(Sign.NEGATIVE.wrap(player.getAttributeInstance(AttributesMod.MELEE_RESISTANCE)));
+			}
+
 			return Math.max(0.0f, (float) AttributesMod.applyAttributeModifiers(
 					damage,
-					Sign.NEGATIVE.wrap(player.getAttributeInstance(AttributesMod.RESISTANCE))
+					attributes.toArray(Signed[]::new)
 			));
 		}
 		return damage;

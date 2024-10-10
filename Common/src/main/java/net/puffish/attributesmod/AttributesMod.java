@@ -76,6 +76,27 @@ public class AttributesMod {
 			createDynamicAttribute(RESISTANCE_ID).setTracked(true)
 	);
 
+	public static final Identifier MAGIC_RESISTANCE_ID
+			= AttributesMod.createAttributeIdentifier("player", "magic_resistance");
+	public static final RegistryEntry<EntityAttribute> MAGIC_RESISTANCE = registerAttribute(
+			MAGIC_RESISTANCE_ID,
+			createDynamicAttribute(MAGIC_RESISTANCE_ID).setTracked(true)
+	);
+
+	public static final Identifier MELEE_RESISTANCE_ID
+			= AttributesMod.createAttributeIdentifier("player", "melee_resistance");
+	public static final RegistryEntry<EntityAttribute> MELEE_RESISTANCE = registerAttribute(
+			MELEE_RESISTANCE_ID,
+			createDynamicAttribute(MELEE_RESISTANCE_ID).setTracked(true)
+	);
+
+	public static final Identifier RANGED_RESISTANCE_ID
+			= AttributesMod.createAttributeIdentifier("player", "ranged_resistance");
+	public static final RegistryEntry<EntityAttribute> RANGED_RESISTANCE = registerAttribute(
+			RANGED_RESISTANCE_ID,
+			createDynamicAttribute(RANGED_RESISTANCE_ID).setTracked(true)
+	);
+
 	public static final Identifier MINING_SPEED_ID
 			= AttributesMod.createAttributeIdentifier("player", "mining_speed");
 	public static final RegistryEntry<EntityAttribute> MINING_SPEED = registerAttribute(
