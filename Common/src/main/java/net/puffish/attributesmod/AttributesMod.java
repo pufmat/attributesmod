@@ -167,6 +167,13 @@ public class AttributesMod {
 			createDynamicAttribute(PROTECTION_SHRED_ID).setTracked(true)
 	);
 
+	public static final Identifier NATURAL_REGENERATION_ID
+			= AttributesMod.createAttributeIdentifier("player", "natural_regeneration");
+	public static final RegistryEntry<EntityAttribute> NATURAL_REGENERATION = registerAttribute(
+			NATURAL_REGENERATION_ID,
+			createDynamicAttribute(NATURAL_REGENERATION_ID).setTracked(true)
+	);
+
 	public static void setup() {
 
 	}
