@@ -6,6 +6,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.puffish.attributesmod.mixin.SimpleRegistryAccessor;
 import net.puffish.attributesmod.util.Platform;
+import net.puffish.attributesmod.util.RegistryEntryReferenceWrapper;
 
 public class FabricPlatform implements Platform {
 
@@ -14,12 +15,13 @@ public class FabricPlatform implements Platform {
 		return Registry.registerReference(registry, id, entry);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> void registerAlias(Registry<T> registry, Identifier aliasId, Identifier id) {
 		var accessor = (SimpleRegistryAccessor<T>) registry;
 		var entry = accessor.getIdToEntry().get(id);
-		accessor.getIdToEntry().put(aliasId, entry);
-		accessor.getKeyToEntry().put(RegistryKey.of(registry.getKey(), aliasId), entry);
+		var aliasEntry = new RegistryEntryReferenceWrapper<>(registry.getEntryOwner(), entry);
+		accessor.getIdToEntry().put(aliasId, aliasEntry);
+		accessor.getKeyToEntry().put(RegistryKey.of(registry.getKey(), aliasId), aliasEntry);
 	}
-
 }
