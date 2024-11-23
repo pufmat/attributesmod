@@ -12,6 +12,7 @@
 		"LivingEntityMixin",
 		"PlayerEntityMixin",
 		"PlayerInventoryMixin",
+		"RegistryEntryReferenceInvoker",
 		"SimpleRegistryAccessor",
 		"SimpleRegistryMixin"
 	],
