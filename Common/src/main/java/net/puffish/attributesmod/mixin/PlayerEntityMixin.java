@@ -7,7 +7,7 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.puffish.attributesmod.AttributesMod;
-import net.puffish.attributesmod.util.Sign;
+import net.puffish.attributesmod.api.DynamicModification;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -43,10 +43,9 @@ public abstract class PlayerEntityMixin {
 	private void injectAtAttack(Entity target, CallbackInfo ci) {
 		var player = (PlayerEntity) (Object) this;
 
-		var knockback = AttributesMod.applyAttributeModifiers(
-				VANILLA_KNOCKBACK,
-				Sign.POSITIVE.wrap(player.getAttributeInstance(AttributesMod.KNOCKBACK))
-		) - VANILLA_KNOCKBACK;
+		var knockback = DynamicModification.create()
+				.withPositive(AttributesMod.KNOCKBACK, player)
+				.applyTo(VANILLA_KNOCKBACK) - VANILLA_KNOCKBACK;
 
 		var yaw = player.getYaw() * MathHelper.RADIANS_PER_DEGREE;
 		var sin = MathHelper.sin(yaw);
@@ -67,10 +66,9 @@ public abstract class PlayerEntityMixin {
 			return speed;
 		}
 
-		return (float) AttributesMod.applyAttributeModifiers(
-				speed,
-				Sign.POSITIVE.wrap(player.getAttributeInstance(AttributesMod.SPRINTING_SPEED))
-		);
+		return DynamicModification.create()
+				.withPositive(AttributesMod.SPRINTING_SPEED, player)
+				.applyTo(speed);
 	}
 
 }
