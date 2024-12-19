@@ -8,7 +8,7 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.puffish.attributesmod.AttributesMod;
-import net.puffish.attributesmod.util.Sign;
+import net.puffish.attributesmod.api.DynamicModification;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -29,10 +29,9 @@ public abstract class ApplyBonusLootFunctionMixin {
 	)
 	private int modifyVariableAtProcess(int value, ItemStack itemStack, LootContext context) {
 		if (enchantment == Enchantments.FORTUNE && context.get(LootContextParameters.THIS_ENTITY) instanceof PlayerEntity player) {
-			var fortune = AttributesMod.applyAttributeModifiers(
-					value,
-					Sign.POSITIVE.wrap(player.getAttributeInstance(AttributesMod.FORTUNE))
-			);
+			var fortune = DynamicModification.create()
+					.withPositive(AttributesMod.FORTUNE, player)
+					.applyTo(value);
 
 			value = (int) fortune;
 			if (context.getRandom().nextFloat() < fortune - value) {

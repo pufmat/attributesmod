@@ -3,11 +3,10 @@ package net.puffish.attributesmod;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.puffish.attributesmod.attribute.DynamicEntityAttribute;
-import net.puffish.attributesmod.mixin.EntityAttributeInstanceInvoker;
+import net.puffish.attributesmod.api.DynamicEntityAttribute;
+import net.puffish.attributesmod.util.DynamicModificationImpl;
 import net.puffish.attributesmod.util.Registrar;
 import net.puffish.attributesmod.util.Signed;
 
@@ -25,133 +24,133 @@ public class AttributesMod {
 
 	public static final Identifier MAGIC_DAMAGE_ID
 			= AttributesMod.createIdentifier("magic_damage");
-	public static final EntityAttribute MAGIC_DAMAGE = createDynamicAttribute(
+	public static final EntityAttribute MAGIC_DAMAGE = DynamicEntityAttribute.create(
 			MAGIC_DAMAGE_ID
 	).setTracked(true);
 
 	public static final Identifier MELEE_DAMAGE_ID
 			= AttributesMod.createIdentifier("melee_damage");
-	public static final EntityAttribute MELEE_DAMAGE = createDynamicAttribute(
+	public static final EntityAttribute MELEE_DAMAGE = DynamicEntityAttribute.create(
 			MELEE_DAMAGE_ID
 	).setTracked(true);
 
 	public static final Identifier RANGED_DAMAGE_ID
 			= AttributesMod.createIdentifier("ranged_damage");
-	public static final EntityAttribute RANGED_DAMAGE = createDynamicAttribute(
+	public static final EntityAttribute RANGED_DAMAGE = DynamicEntityAttribute.create(
 			RANGED_DAMAGE_ID
 	).setTracked(true);
 
 	public static final Identifier FORTUNE_ID
 			= AttributesMod.createIdentifier("fortune");
-	public static final EntityAttribute FORTUNE = createDynamicAttribute(
+	public static final EntityAttribute FORTUNE = DynamicEntityAttribute.create(
 			FORTUNE_ID
 	).setTracked(true);
 
 	public static final Identifier HEALING_ID
 			= AttributesMod.createIdentifier("healing");
-	public static final EntityAttribute HEALING = createDynamicAttribute(
+	public static final EntityAttribute HEALING = DynamicEntityAttribute.create(
 			HEALING_ID
 	).setTracked(true);
 
 	public static final Identifier JUMP_ID
 			= AttributesMod.createIdentifier("jump");
-	public static final EntityAttribute JUMP = createDynamicAttribute(
+	public static final EntityAttribute JUMP = DynamicEntityAttribute.create(
 			JUMP_ID
 	).setTracked(true);
 
 	public static final Identifier RESISTANCE_ID
 			= AttributesMod.createIdentifier("resistance");
-	public static final EntityAttribute RESISTANCE = createDynamicAttribute(
+	public static final EntityAttribute RESISTANCE = DynamicEntityAttribute.create(
 			RESISTANCE_ID
 	).setTracked(true);
 
 	public static final Identifier MAGIC_RESISTANCE_ID
 			= AttributesMod.createIdentifier("magic_resistance");
-	public static final EntityAttribute MAGIC_RESISTANCE = createDynamicAttribute(
+	public static final EntityAttribute MAGIC_RESISTANCE = DynamicEntityAttribute.create(
 			MAGIC_RESISTANCE_ID
 	).setTracked(true);
 
 	public static final Identifier MELEE_RESISTANCE_ID
 			= AttributesMod.createIdentifier("melee_resistance");
-	public static final EntityAttribute MELEE_RESISTANCE = createDynamicAttribute(
+	public static final EntityAttribute MELEE_RESISTANCE = DynamicEntityAttribute.create(
 			MELEE_RESISTANCE_ID
 	).setTracked(true);
 
 	public static final Identifier RANGED_RESISTANCE_ID
 			= AttributesMod.createIdentifier("ranged_resistance");
-	public static final EntityAttribute RANGED_RESISTANCE = createDynamicAttribute(
+	public static final EntityAttribute RANGED_RESISTANCE = DynamicEntityAttribute.create(
 			RANGED_RESISTANCE_ID
 	).setTracked(true);
 
 	public static final Identifier MINING_SPEED_ID
 			= AttributesMod.createIdentifier("mining_speed");
-	public static final EntityAttribute MINING_SPEED = createDynamicAttribute(
+	public static final EntityAttribute MINING_SPEED = DynamicEntityAttribute.create(
 			MINING_SPEED_ID
 	).setTracked(true);
 
 	public static final Identifier PICKAXE_SPEED_ID
 			= AttributesMod.createIdentifier("pickaxe_speed");
-	public static final EntityAttribute PICKAXE_SPEED = createDynamicAttribute(
+	public static final EntityAttribute PICKAXE_SPEED = DynamicEntityAttribute.create(
 			PICKAXE_SPEED_ID
 	).setTracked(true);
 
 	public static final Identifier AXE_SPEED_ID
 			= AttributesMod.createIdentifier("axe_speed");
-	public static final EntityAttribute AXE_SPEED = createDynamicAttribute(
+	public static final EntityAttribute AXE_SPEED = DynamicEntityAttribute.create(
 			AXE_SPEED_ID
 	).setTracked(true);
 
 	public static final Identifier SHOVEL_SPEED_ID
 			= AttributesMod.createIdentifier("shovel_speed");
-	public static final EntityAttribute SHOVEL_SPEED = createDynamicAttribute(
+	public static final EntityAttribute SHOVEL_SPEED = DynamicEntityAttribute.create(
 			SHOVEL_SPEED_ID
 	).setTracked(true);
 
 	public static final Identifier SPRINTING_SPEED_ID
 			= AttributesMod.createIdentifier("sprinting_speed");
-	public static final EntityAttribute SPRINTING_SPEED = createDynamicAttribute(
+	public static final EntityAttribute SPRINTING_SPEED = DynamicEntityAttribute.create(
 			SPRINTING_SPEED_ID
 	).setTracked(true);
 
 	public static final Identifier KNOCKBACK_ID
 			= AttributesMod.createIdentifier("knockback");
-	public static final EntityAttribute KNOCKBACK = createDynamicAttribute(
+	public static final EntityAttribute KNOCKBACK = DynamicEntityAttribute.create(
 			KNOCKBACK_ID
 	).setTracked(true);
 
 	public static final Identifier REPAIR_COST_ID
 			= AttributesMod.createIdentifier("repair_cost");
-	public static final EntityAttribute REPAIR_COST = createDynamicAttribute(
+	public static final EntityAttribute REPAIR_COST = DynamicEntityAttribute.create(
 			REPAIR_COST_ID
 	).setTracked(true);
 
 	public static final Identifier ARMOR_SHRED_ID
 			= AttributesMod.createIdentifier("armor_shred");
-	public static final EntityAttribute ARMOR_SHRED = createDynamicAttribute(
+	public static final EntityAttribute ARMOR_SHRED = DynamicEntityAttribute.create(
 			ARMOR_SHRED_ID
 	).setTracked(true);
 
 	public static final Identifier TOUGHNESS_SHRED_ID
 			= AttributesMod.createIdentifier("toughness_shred");
-	public static final EntityAttribute TOUGHNESS_SHRED = createDynamicAttribute(
+	public static final EntityAttribute TOUGHNESS_SHRED = DynamicEntityAttribute.create(
 			TOUGHNESS_SHRED_ID
 	).setTracked(true);
 
 	public static final Identifier PROTECTION_SHRED_ID
 			= AttributesMod.createIdentifier("protection_shred");
-	public static final EntityAttribute PROTECTION_SHRED = createDynamicAttribute(
+	public static final EntityAttribute PROTECTION_SHRED = DynamicEntityAttribute.create(
 			PROTECTION_SHRED_ID
 	).setTracked(true);
 
 	public static final Identifier NATURAL_REGENERATION_ID
 			= AttributesMod.createIdentifier("natural_regeneration");
-	public static final EntityAttribute NATURAL_REGENERATION = createDynamicAttribute(
+	public static final EntityAttribute NATURAL_REGENERATION = DynamicEntityAttribute.create(
 			NATURAL_REGENERATION_ID
 	).setTracked(true);
 
 	public static final Identifier STEALTH_ID
 			= AttributesMod.createIdentifier("stealth");
-	public static final EntityAttribute STEALTH = createDynamicAttribute(
+	public static final EntityAttribute STEALTH = DynamicEntityAttribute.create(
 			STEALTH_ID
 	).setTracked(true);
 
@@ -195,67 +194,17 @@ public class AttributesMod {
 		);
 	}
 
-	public static EntityAttribute createDynamicAttribute(Identifier id) {
-		return new DynamicEntityAttribute(
-				"attribute." + id.getNamespace() + "." + id.getPath()
-		);
-	}
-
+	// This method is left for backward compatibility in case someone uses it.
 	@SafeVarargs
 	public static double applyAttributeModifiers(
 			double initial,
 			Signed<EntityAttributeInstance>... attributes
 	) {
+		var dm = new DynamicModificationImpl();
 		for (var signedAttribute : attributes) {
-			if (signedAttribute.value() == null) {
-				continue;
-			}
-			for (var modifier : ((EntityAttributeInstanceInvoker) signedAttribute.value())
-					.invokeGetModifiersByOperation(EntityAttributeModifier.Operation.ADDITION)
-			) {
-				switch (signedAttribute.sign()) {
-					case POSITIVE -> initial += modifier.getValue();
-					case NEGATIVE -> initial -= modifier.getValue();
-					default -> throw new IllegalStateException();
-				}
-			}
+			dm.with(signedAttribute);
 		}
-		double result = initial;
-		for (var signedAttribute : attributes) {
-			if (signedAttribute.value() == null) {
-				continue;
-			}
-			for (var modifier : ((EntityAttributeInstanceInvoker) signedAttribute.value())
-					.invokeGetModifiersByOperation(EntityAttributeModifier.Operation.MULTIPLY_BASE)
-			) {
-				switch (signedAttribute.sign()) {
-					case POSITIVE -> result += initial * modifier.getValue();
-					case NEGATIVE -> result -= initial * modifier.getValue();
-					default -> throw new IllegalStateException();
-				}
-			}
-		}
-		for (var signedAttribute : attributes) {
-			if (signedAttribute.value() == null) {
-				continue;
-			}
-			for (var modifier : ((EntityAttributeInstanceInvoker) signedAttribute.value())
-					.invokeGetModifiersByOperation(EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
-			) {
-				switch (signedAttribute.sign()) {
-					case POSITIVE -> result *= 1.0 + modifier.getValue();
-					case NEGATIVE -> result *= 1.0 - modifier.getValue();
-					default -> throw new IllegalStateException();
-				}
-			}
-		}
-		for (var signedAttribute : attributes) {
-			if (signedAttribute.value() == null) {
-				continue;
-			}
-			result = signedAttribute.value().getAttribute().clamp(result);
-		}
-		return result;
+		return dm.applyTo(initial);
 	}
 
 	private static void registerAttribute(Registrar registrar, Identifier id, EntityAttribute attribute) {

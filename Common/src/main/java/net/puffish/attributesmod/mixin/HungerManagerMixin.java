@@ -5,7 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.puffish.attributesmod.AttributesMod;
-import net.puffish.attributesmod.util.Sign;
+import net.puffish.attributesmod.api.DynamicModification;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,10 +23,9 @@ public abstract class HungerManagerMixin {
 			)
 	)
 	private void wrapOperationAtHeal(PlayerEntity player, float amount, Operation<Void> operation) {
-		operation.call(player, Math.max(0.0f, (float) AttributesMod.applyAttributeModifiers(
-				amount,
-				Sign.POSITIVE.wrap(player.getAttributeInstance(AttributesMod.NATURAL_REGENERATION))
-		)));
+		operation.call(player, Math.max(0.0f, DynamicModification.create()
+				.withPositive(AttributesMod.NATURAL_REGENERATION, player)
+				.applyTo(amount)));
 	}
 
 	@ModifyConstant(
