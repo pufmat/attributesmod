@@ -2,7 +2,7 @@ package net.puffish.attributesmod.mixin;
 
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.puffish.attributesmod.attribute.DynamicEntityAttribute;
+import net.puffish.attributesmod.api.DynamicEntityAttribute;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
