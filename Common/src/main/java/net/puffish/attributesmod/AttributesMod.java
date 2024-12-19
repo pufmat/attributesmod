@@ -149,6 +149,13 @@ public class AttributesMod {
 			NATURAL_REGENERATION_ID
 	).setTracked(true);
 
+	public static final Identifier STEALTH_ID
+			= AttributesMod.createIdentifier("stealth");
+	public static final EntityAttribute STEALTH = createDynamicAttribute(
+			STEALTH_ID
+	).setTracked(true);
+
+
 	public static void setup(Registrar registrar) {
 		registerAttribute(registrar, STAMINA_ID, STAMINA);
 		registerAttribute(registrar, MAGIC_DAMAGE_ID, MAGIC_DAMAGE);
@@ -172,6 +179,7 @@ public class AttributesMod {
 		registerAttribute(registrar, TOUGHNESS_SHRED_ID, TOUGHNESS_SHRED);
 		registerAttribute(registrar, PROTECTION_SHRED_ID, PROTECTION_SHRED);
 		registerAttribute(registrar, NATURAL_REGENERATION_ID, NATURAL_REGENERATION);
+		registerAttribute(registrar, STEALTH_ID, STEALTH);
 	}
 
 	public static Identifier createIdentifier(String path) {
