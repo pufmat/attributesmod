@@ -14,7 +14,8 @@
 		"PlayerEntityMixin",
 		"PlayerInventoryMixin",
 		"SimpleRegistryAccessor",
-		"SimpleRegistryMixin"
+		"SimpleRegistryMixin",
+		"TargetPredicateMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
