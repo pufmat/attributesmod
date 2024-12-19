@@ -20,5 +20,6 @@
 	"attribute.puffish_attributes.armor_shred": "Osłabianie zbroi",
 	"attribute.puffish_attributes.toughness_shred": "Osłabianie wytrzymałości",
 	"attribute.puffish_attributes.protection_shred": "Osłabianie ochrony",
-	"attribute.puffish_attributes.natural_regeneration": "Naturalna regeneracja"
+	"attribute.puffish_attributes.natural_regeneration": "Naturalna regeneracja",
+	"attribute.puffish_attributes.stealth": "Skradanie się"
 }

@@ -20,5 +20,6 @@
 	"attribute.puffish_attributes.armor_shred": "Armor Shred",
 	"attribute.puffish_attributes.toughness_shred": "Toughness Shred",
 	"attribute.puffish_attributes.protection_shred": "Protection Shred",
-	"attribute.puffish_attributes.natural_regeneration": "Natural Regeneration"
+	"attribute.puffish_attributes.natural_regeneration": "Natural Regeneration",
+	"attribute.puffish_attributes.stealth": "Stealth"
 }
