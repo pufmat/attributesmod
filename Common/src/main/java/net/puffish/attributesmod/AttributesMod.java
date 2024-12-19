@@ -174,6 +174,14 @@ public class AttributesMod {
 			createDynamicAttribute(NATURAL_REGENERATION_ID).setTracked(true)
 	);
 
+	public static final Identifier STEALTH_ID
+			= AttributesMod.createIdentifier("stealth");
+	public static final RegistryEntry<EntityAttribute> STEALTH = registerAttribute(
+			STEALTH_ID,
+			createDynamicAttribute(STEALTH_ID).setTracked(true)
+	);
+
+
 	public static void setup() {
 
 	}

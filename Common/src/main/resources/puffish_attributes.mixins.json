@@ -11,7 +11,8 @@
 		"HungerManagerMixin",
 		"LivingEntityMixin",
 		"PlayerEntityMixin",
-		"PlayerInventoryMixin"
+		"PlayerInventoryMixin",
+		"TargetPredicateMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
