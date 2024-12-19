@@ -57,12 +57,13 @@ public abstract class LivingEntityMixin {
 			var kind = DamageKind.of(source);
 			if (kind.isMagic()) {
 				attributes.add(Sign.POSITIVE.wrap(attacker.getAttributeInstance(AttributesMod.MAGIC_DAMAGE)));
-			}
-			if (kind.isProjectile()) {
-				attributes.add(Sign.POSITIVE.wrap(attacker.getAttributeInstance(AttributesMod.RANGED_DAMAGE)));
-			}
-			if (kind.isMelee()) {
-				attributes.add(Sign.POSITIVE.wrap(attacker.getAttributeInstance(AttributesMod.MELEE_DAMAGE)));
+			} else {
+				if (kind.isProjectile()) {
+					attributes.add(Sign.POSITIVE.wrap(attacker.getAttributeInstance(AttributesMod.RANGED_DAMAGE)));
+				}
+				if (kind.isMelee()) {
+					attributes.add(Sign.POSITIVE.wrap(attacker.getAttributeInstance(AttributesMod.MELEE_DAMAGE)));
+				}
 			}
 
 			damage = (float) AttributesMod.applyAttributeModifiers(
@@ -161,12 +162,13 @@ public abstract class LivingEntityMixin {
 			var kind = DamageKind.of(source);
 			if (kind.isMagic()) {
 				attributes.add(Sign.NEGATIVE.wrap(entity.getAttributeInstance(AttributesMod.MAGIC_RESISTANCE)));
-			}
-			if (kind.isProjectile()) {
-				attributes.add(Sign.NEGATIVE.wrap(entity.getAttributeInstance(AttributesMod.RANGED_RESISTANCE)));
-			}
-			if (kind.isMelee()) {
-				attributes.add(Sign.NEGATIVE.wrap(entity.getAttributeInstance(AttributesMod.MELEE_RESISTANCE)));
+			} else {
+				if (kind.isProjectile()) {
+					attributes.add(Sign.NEGATIVE.wrap(entity.getAttributeInstance(AttributesMod.RANGED_RESISTANCE)));
+				}
+				if (kind.isMelee()) {
+					attributes.add(Sign.NEGATIVE.wrap(entity.getAttributeInstance(AttributesMod.MELEE_RESISTANCE)));
+				}
 			}
 
 			return Math.max(0.0f, (float) AttributesMod.applyAttributeModifiers(
