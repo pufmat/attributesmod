@@ -9,7 +9,7 @@ import net.minecraft.screen.Property;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.ScreenHandlerType;
 import net.puffish.attributesmod.AttributesMod;
-import net.puffish.attributesmod.util.Sign;
+import net.puffish.attributesmod.api.DynamicModification;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,9 +29,8 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 			)
 	)
 	private void wrapOperationAtSet(Property property, int value, Operation<Void> operation) {
-		operation.call(property, (int) Math.max(1, Math.round(AttributesMod.applyAttributeModifiers(
-				value,
-				Sign.POSITIVE.wrap(player.getAttributeInstance(AttributesMod.REPAIR_COST))
-		))));
+		operation.call(property, Math.max(1, Math.round(DynamicModification.create()
+				.withPositive(AttributesMod.REPAIR_COST, player)
+				.applyTo(value))));
 	}
 }
