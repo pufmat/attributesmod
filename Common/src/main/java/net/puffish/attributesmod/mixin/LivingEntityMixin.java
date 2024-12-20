@@ -32,7 +32,8 @@ public abstract class LivingEntityMixin {
 				.add(AttributesMod.ARMOR_SHRED)
 				.add(AttributesMod.TOUGHNESS_SHRED)
 				.add(AttributesMod.PROTECTION_SHRED)
-				.add(AttributesMod.STEALTH);
+				.add(AttributesMod.STEALTH)
+				.add(AttributesMod.LIFE_STEAL);
 	}
 
 	@ModifyVariable(
