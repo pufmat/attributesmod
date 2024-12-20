@@ -180,6 +180,13 @@ public class AttributesMod {
 			DynamicEntityAttribute.create(STEALTH_ID).setTracked(true)
 	);
 
+	public static final Identifier LIFE_STEAL_ID
+			= AttributesMod.createIdentifier("life_steal");
+	public static final RegistryEntry<EntityAttribute> LIFE_STEAL = registerAttribute(
+			LIFE_STEAL_ID,
+			DynamicEntityAttribute.create(LIFE_STEAL_ID).setTracked(true)
+	);
+
 
 	public static void setup() {
 

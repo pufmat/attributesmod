@@ -6,6 +6,7 @@
 	"mixins": [
 		"AnvilScreenHandlerMixin",
 		"ApplyBonusLootFunctionMixin",
+		"DamageTrackerMixin",
 		"EntityAttributeInstanceInvoker",
 		"EntityAttributeInstanceMixin",
 		"HungerManagerMixin",
