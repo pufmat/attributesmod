@@ -21,6 +21,7 @@
 		"puffish_attributes:toughness_shred",
 		"puffish_attributes:protection_shred",
 		"puffish_attributes:natural_regeneration",
-		"puffish_attributes:stealth"
+		"puffish_attributes:stealth",
+		"puffish_attributes:life_steal"
 	]
 }
