@@ -154,6 +154,12 @@ public class AttributesMod {
 			STEALTH_ID
 	).setTracked(true);
 
+	public static final Identifier LIFE_STEAL_ID
+			= AttributesMod.createIdentifier("life_steal");
+	public static final EntityAttribute LIFE_STEAL = DynamicEntityAttribute.create(
+			LIFE_STEAL_ID
+	).setTracked(true);
+
 
 	public static void setup(Registrar registrar) {
 		registerAttribute(registrar, STAMINA_ID, STAMINA);
@@ -179,6 +185,7 @@ public class AttributesMod {
 		registerAttribute(registrar, PROTECTION_SHRED_ID, PROTECTION_SHRED);
 		registerAttribute(registrar, NATURAL_REGENERATION_ID, NATURAL_REGENERATION);
 		registerAttribute(registrar, STEALTH_ID, STEALTH);
+		registerAttribute(registrar, LIFE_STEAL_ID, LIFE_STEAL);
 	}
 
 	public static Identifier createIdentifier(String path) {
