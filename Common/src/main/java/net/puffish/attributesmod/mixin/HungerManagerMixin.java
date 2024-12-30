@@ -30,7 +30,8 @@ public abstract class HungerManagerMixin {
 
 	@ModifyConstant(
 			method = "update",
-			constant = @Constant(floatValue = 4.0f, ordinal = 0)
+			constant = @Constant(floatValue = 4.0f, ordinal = 0),
+			require = 0
 	)
 	private float modifyConstant0AtUpdate(float value, PlayerEntity player) {
 		return getStamina(player);
@@ -38,7 +39,8 @@ public abstract class HungerManagerMixin {
 
 	@ModifyConstant(
 			method = "update",
-			constant = @Constant(floatValue = 4.0f, ordinal = 1)
+			constant = @Constant(floatValue = 4.0f, ordinal = 1),
+			require = 0
 	)
 	private float modifyConstant1AtUpdate(float value, PlayerEntity player) {
 		return getStamina(player);
