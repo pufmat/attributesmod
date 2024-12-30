@@ -160,6 +160,12 @@ public class AttributesMod {
 			LIFE_STEAL_ID
 	).setTracked(true);
 
+	public static final Identifier FALL_REDUCTION_ID
+			= AttributesMod.createIdentifier("fall_reduction");
+	public static final EntityAttribute FALL_REDUCTION = DynamicEntityAttribute.create(
+			FALL_REDUCTION_ID
+	).setTracked(true);
+
 
 	public static void setup(Registrar registrar) {
 		registerAttribute(registrar, STAMINA_ID, STAMINA);
@@ -186,6 +192,7 @@ public class AttributesMod {
 		registerAttribute(registrar, NATURAL_REGENERATION_ID, NATURAL_REGENERATION);
 		registerAttribute(registrar, STEALTH_ID, STEALTH);
 		registerAttribute(registrar, LIFE_STEAL_ID, LIFE_STEAL);
+		registerAttribute(registrar, FALL_REDUCTION_ID, FALL_REDUCTION);
 	}
 
 	public static Identifier createIdentifier(String path) {

@@ -22,5 +22,6 @@
 	"attribute.puffish_attributes.protection_shred": "Osłabianie ochrony",
 	"attribute.puffish_attributes.natural_regeneration": "Naturalna regeneracja",
 	"attribute.puffish_attributes.stealth": "Skradanie się",
-	"attribute.puffish_attributes.life_steal": "Kradzież życia"
+	"attribute.puffish_attributes.life_steal": "Kradzież życia",
+	"attribute.puffish_attributes.fall_reduction": "Redukcja upadku"
 }
