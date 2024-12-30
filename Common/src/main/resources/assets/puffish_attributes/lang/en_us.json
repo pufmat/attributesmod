@@ -22,5 +22,6 @@
 	"attribute.puffish_attributes.protection_shred": "Protection Shred",
 	"attribute.puffish_attributes.natural_regeneration": "Natural Regeneration",
 	"attribute.puffish_attributes.stealth": "Stealth",
-	"attribute.puffish_attributes.life_steal": "Life Steal"
+	"attribute.puffish_attributes.life_steal": "Life Steal",
+	"attribute.puffish_attributes.fall_reduction": "Fall Reduction"
 }

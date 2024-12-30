@@ -34,7 +34,8 @@ public abstract class LivingEntityMixin {
 				.add(AttributesMod.TOUGHNESS_SHRED)
 				.add(AttributesMod.PROTECTION_SHRED)
 				.add(AttributesMod.STEALTH)
-				.add(AttributesMod.LIFE_STEAL);
+				.add(AttributesMod.LIFE_STEAL)
+				.add(AttributesMod.FALL_REDUCTION);
 	}
 
 	@ModifyVariable(
@@ -128,13 +129,17 @@ public abstract class LivingEntityMixin {
 
 	@ModifyVariable(
 			method = "computeFallDamage",
-			at = @At("STORE"),
-			ordinal = 2
+			at = @At("HEAD"),
+			argsOnly = true,
+			ordinal = 0
 	)
-	private float modifyVariableAtComputeFallDamage(float reduction) {
-		return reduction + (DynamicModification.create()
+	private float modifyVariableAtComputeFallDamage(float fallDistance) {
+		return DynamicModification.create()
+				.withNegative(AttributesMod.FALL_REDUCTION, ((LivingEntity) (Object) this))
+				.applyTo(fallDistance)
+				- DynamicModification.create()
 				.withPositive(AttributesMod.JUMP, ((LivingEntity) (Object) this))
-				.relativeTo(1.0f) * 10.0f);
+				.relativeTo(1.0f) * 10.0f;
 	}
 
 	@ModifyReturnValue(
