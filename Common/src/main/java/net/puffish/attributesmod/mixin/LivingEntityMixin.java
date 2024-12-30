@@ -32,6 +32,10 @@ public abstract class LivingEntityMixin {
 				.add(AttributesMod.ARMOR_SHRED)
 				.add(AttributesMod.TOUGHNESS_SHRED)
 				.add(AttributesMod.PROTECTION_SHRED)
+				.add(AttributesMod.RESISTANCE_SHRED)
+				.add(AttributesMod.MAGIC_RESISTANCE_SHRED)
+				.add(AttributesMod.MELEE_RESISTANCE_SHRED)
+				.add(AttributesMod.RANGED_RESISTANCE_SHRED)
 				.add(AttributesMod.STEALTH)
 				.add(AttributesMod.LIFE_STEAL)
 				.add(AttributesMod.FALL_REDUCTION);
@@ -146,26 +150,44 @@ public abstract class LivingEntityMixin {
 			at = @At("TAIL")
 	)
 	private float injectAtApplyEnchantmentsToDamage(float damage, @Local(argsOnly = true) DamageSource source) {
-		if (damage < Float.MAX_VALUE / 3.0f) {
-			var entity = ((LivingEntity) (Object) this);
+		if (damage > Float.MAX_VALUE / 3.0f) {
+			return damage;
+		}
+		var entity = ((LivingEntity) (Object) this);
+		var kind = DamageKind.of(source);
 
-			var dm = DynamicModification.create();
+		var dmResistance = DynamicModification.create();
+		dmResistance.withPositive(AttributesMod.RESISTANCE, entity);
+		if (kind.isMagic()) {
+			dmResistance.withPositive(AttributesMod.MAGIC_RESISTANCE, entity);
+		} else {
+			if (kind.isProjectile()) {
+				dmResistance.withPositive(AttributesMod.RANGED_RESISTANCE, entity);
+			}
+			if (kind.isMelee()) {
+				dmResistance.withPositive(AttributesMod.MELEE_RESISTANCE, entity);
+			}
+		}
 
-			dm.withNegative(AttributesMod.RESISTANCE, entity);
-			var kind = DamageKind.of(source);
+		var resistance = dmResistance.relativeTo(damage);
+
+		if (source.getAttacker() instanceof LivingEntity attacker) {
+			var dmShred = DynamicModification.create();
+			dmShred.withNegative(AttributesMod.RESISTANCE_SHRED, attacker);
 			if (kind.isMagic()) {
-				dm.withNegative(AttributesMod.MAGIC_RESISTANCE, entity);
+				dmShred.withNegative(AttributesMod.MAGIC_RESISTANCE_SHRED, attacker);
 			} else {
 				if (kind.isProjectile()) {
-					dm.withNegative(AttributesMod.RANGED_RESISTANCE, entity);
+					dmShred.withNegative(AttributesMod.MAGIC_RESISTANCE_SHRED, attacker);
 				}
 				if (kind.isMelee()) {
-					dm.withNegative(AttributesMod.MELEE_RESISTANCE, entity);
+					dmShred.withNegative(AttributesMod.MAGIC_RESISTANCE_SHRED, attacker);
 				}
 			}
 
-			return Math.max(0.0f, dm.applyTo(damage));
+			resistance = Math.max(0.0f, dmShred.applyTo(resistance));
 		}
-		return damage;
+
+		return Math.max(0.0f, damage - resistance);
 	}
 }

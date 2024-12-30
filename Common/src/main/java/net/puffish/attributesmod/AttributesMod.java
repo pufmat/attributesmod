@@ -142,6 +142,30 @@ public class AttributesMod {
 			PROTECTION_SHRED_ID
 	).setTracked(true);
 
+	public static final Identifier RESISTANCE_SHRED_ID
+			= AttributesMod.createIdentifier("resistance_shred");
+	public static final EntityAttribute RESISTANCE_SHRED = DynamicEntityAttribute.create(
+			RESISTANCE_SHRED_ID
+	).setTracked(true);
+
+	public static final Identifier MAGIC_RESISTANCE_SHRED_ID
+			= AttributesMod.createIdentifier("magic_resistance_shred");
+	public static final EntityAttribute MAGIC_RESISTANCE_SHRED = DynamicEntityAttribute.create(
+			MAGIC_RESISTANCE_SHRED_ID
+	).setTracked(true);
+
+	public static final Identifier MELEE_RESISTANCE_SHRED_ID
+			= AttributesMod.createIdentifier("melee_resistance_shred");
+	public static final EntityAttribute MELEE_RESISTANCE_SHRED = DynamicEntityAttribute.create(
+			MELEE_RESISTANCE_SHRED_ID
+	).setTracked(true);
+
+	public static final Identifier RANGED_RESISTANCE_SHRED_ID
+			= AttributesMod.createIdentifier("ranged_resistance_shred");
+	public static final EntityAttribute RANGED_RESISTANCE_SHRED = DynamicEntityAttribute.create(
+			RANGED_RESISTANCE_SHRED_ID
+	).setTracked(true);
+
 	public static final Identifier NATURAL_REGENERATION_ID
 			= AttributesMod.createIdentifier("natural_regeneration");
 	public static final EntityAttribute NATURAL_REGENERATION = DynamicEntityAttribute.create(
@@ -189,6 +213,10 @@ public class AttributesMod {
 		registerAttribute(registrar, ARMOR_SHRED_ID, ARMOR_SHRED);
 		registerAttribute(registrar, TOUGHNESS_SHRED_ID, TOUGHNESS_SHRED);
 		registerAttribute(registrar, PROTECTION_SHRED_ID, PROTECTION_SHRED);
+		registerAttribute(registrar, RESISTANCE_SHRED_ID, RESISTANCE_SHRED);
+		registerAttribute(registrar, MAGIC_RESISTANCE_SHRED_ID, MAGIC_RESISTANCE_SHRED);
+		registerAttribute(registrar, MELEE_RESISTANCE_SHRED_ID, MELEE_RESISTANCE_SHRED);
+		registerAttribute(registrar, RANGED_RESISTANCE_SHRED_ID, RANGED_RESISTANCE_SHRED);
 		registerAttribute(registrar, NATURAL_REGENERATION_ID, NATURAL_REGENERATION);
 		registerAttribute(registrar, STEALTH_ID, STEALTH);
 		registerAttribute(registrar, LIFE_STEAL_ID, LIFE_STEAL);
