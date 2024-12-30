@@ -166,6 +166,34 @@ public class AttributesMod {
 			DynamicEntityAttribute.create(PROTECTION_SHRED_ID).setTracked(true)
 	);
 
+	public static final Identifier RESISTANCE_SHRED_ID
+			= AttributesMod.createIdentifier("resistance_shred");
+	public static final RegistryEntry<EntityAttribute> RESISTANCE_SHRED = registerAttribute(
+			RESISTANCE_SHRED_ID,
+			DynamicEntityAttribute.create(RESISTANCE_SHRED_ID).setTracked(true)
+	);
+
+	public static final Identifier MAGIC_RESISTANCE_SHRED_ID
+			= AttributesMod.createIdentifier("magic_resistance_shred");
+	public static final RegistryEntry<EntityAttribute> MAGIC_RESISTANCE_SHRED = registerAttribute(
+			MAGIC_RESISTANCE_SHRED_ID,
+			DynamicEntityAttribute.create(MAGIC_RESISTANCE_SHRED_ID).setTracked(true)
+	);
+
+	public static final Identifier MELEE_RESISTANCE_SHRED_ID
+			= AttributesMod.createIdentifier("melee_resistance_shred");
+	public static final RegistryEntry<EntityAttribute> MELEE_RESISTANCE_SHRED = registerAttribute(
+			MELEE_RESISTANCE_SHRED_ID,
+			DynamicEntityAttribute.create(MELEE_RESISTANCE_SHRED_ID).setTracked(true)
+	);
+
+	public static final Identifier RANGED_RESISTANCE_SHRED_ID
+			= AttributesMod.createIdentifier("ranged_resistance_shred");
+	public static final RegistryEntry<EntityAttribute> RANGED_RESISTANCE_SHRED = registerAttribute(
+			RANGED_RESISTANCE_SHRED_ID,
+			DynamicEntityAttribute.create(RANGED_RESISTANCE_SHRED_ID).setTracked(true)
+	);
+
 	public static final Identifier NATURAL_REGENERATION_ID
 			= AttributesMod.createIdentifier("natural_regeneration");
 	public static final RegistryEntry<EntityAttribute> NATURAL_REGENERATION = registerAttribute(
