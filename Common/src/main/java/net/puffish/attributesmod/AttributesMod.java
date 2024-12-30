@@ -187,6 +187,13 @@ public class AttributesMod {
 			DynamicEntityAttribute.create(LIFE_STEAL_ID).setTracked(true)
 	);
 
+	public static final Identifier FALL_REDUCTION_ID
+			= AttributesMod.createIdentifier("fall_reduction");
+	public static final RegistryEntry<EntityAttribute> FALL_REDUCTION = registerAttribute(
+			FALL_REDUCTION_ID,
+			DynamicEntityAttribute.create(FALL_REDUCTION_ID).setTracked(true)
+	);
+
 
 	public static void setup() {
 
