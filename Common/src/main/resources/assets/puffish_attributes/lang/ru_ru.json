@@ -20,5 +20,12 @@
 	"attribute.puffish_attributes.armor_shred": "Разрыв брони",
 	"attribute.puffish_attributes.toughness_shred": "Ослабление твёрдости",
 	"attribute.puffish_attributes.protection_shred": "Обрыв защиты",
-	"attribute.puffish_attributes.natural_regeneration": "Естественная регенерация"
+	"attribute.puffish_attributes.resistance_shred": "Обрыв сопротивления", 
+ 	"attribute.puffish_attributes.magic_resistance_shred": "Обрыв сопротивления магии", 
+ 	"attribute.puffish_attributes.melee_resistance_shred": "Обрыв сопротивления урону ближнего боя", 
+ 	"attribute.puffish_attributes.ranged_resistance_shred": "Обрыв сопротивления дальнему урону", 
+ 	"attribute.puffish_attributes.natural_regeneration": "Естественная регенерация", 
+ 	"attribute.puffish_attributes.stealth": "Незаметность", 
+ 	"attribute.puffish_attributes.life_steal": "Похищение жизни", 
+ 	"attribute.puffish_attributes.fall_reduction": "Снижение урона от падения" 
 }
