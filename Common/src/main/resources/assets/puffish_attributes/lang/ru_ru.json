@@ -1,12 +1,12 @@
 {
-	"attribute.puffish_attributes.player.stamina": "Выносливость",
-	"attribute.puffish_attributes.player.melee_damage": "Урон в ближнем бою",
-	"attribute.puffish_attributes.player.ranged_damage": "Урон в дальнем бою",
-	"attribute.puffish_attributes.player.fortune": "Удача",
-	"attribute.puffish_attributes.player.healing": "Регенерация",
-	"attribute.puffish_attributes.player.jump": "Прыжок",
-	"attribute.puffish_attributes.player.resistance": "Сопротивление",
-	"attribute.puffish_attributes.player.mining_speed": "Скорость копания",
-	"attribute.puffish_attributes.player.sprinting_speed": "Скорость бега",
-	"attribute.puffish_attributes.player.knockback": "Отдача"
+	"attribute.puffish_attributes.stamina": "Выносливость",
+	"attribute.puffish_attributes.melee_damage": "Урон в ближнем бою",
+	"attribute.puffish_attributes.ranged_damage": "Урон в дальнем бою",
+	"attribute.puffish_attributes.fortune": "Удача",
+	"attribute.puffish_attributes.healing": "Регенерация",
+	"attribute.puffish_attributes.jump": "Прыжок",
+	"attribute.puffish_attributes.resistance": "Сопротивление",
+	"attribute.puffish_attributes.mining_speed": "Скорость копания",
+	"attribute.puffish_attributes.sprinting_speed": "Скорость бега",
+	"attribute.puffish_attributes.knockback": "Отдача"
 }
