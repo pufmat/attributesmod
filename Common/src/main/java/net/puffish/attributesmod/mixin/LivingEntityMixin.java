@@ -158,19 +158,19 @@ public abstract class LivingEntityMixin {
 		var kind = DamageKind.of(source);
 
 		var dmResistance = DynamicModification.create();
-		dmResistance.withPositive(AttributesMod.RESISTANCE, entity);
+		dmResistance.withNegative(AttributesMod.RESISTANCE, entity);
 		if (kind.isMagic()) {
-			dmResistance.withPositive(AttributesMod.MAGIC_RESISTANCE, entity);
+			dmResistance.withNegative(AttributesMod.MAGIC_RESISTANCE, entity);
 		} else {
 			if (kind.isProjectile()) {
-				dmResistance.withPositive(AttributesMod.RANGED_RESISTANCE, entity);
+				dmResistance.withNegative(AttributesMod.RANGED_RESISTANCE, entity);
 			}
 			if (kind.isMelee()) {
-				dmResistance.withPositive(AttributesMod.MELEE_RESISTANCE, entity);
+				dmResistance.withNegative(AttributesMod.MELEE_RESISTANCE, entity);
 			}
 		}
 
-		var resistance = dmResistance.relativeTo(damage);
+		var resistance = damage - dmResistance.applyTo(damage);
 
 		if (source.getAttacker() instanceof LivingEntity attacker) {
 			var dmShred = DynamicModification.create();
