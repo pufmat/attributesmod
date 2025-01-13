@@ -38,7 +38,9 @@ public abstract class LivingEntityMixin {
 				.add(AttributesMod.RANGED_RESISTANCE_SHRED)
 				.add(AttributesMod.STEALTH)
 				.add(AttributesMod.LIFE_STEAL)
-				.add(AttributesMod.FALL_REDUCTION);
+				.add(AttributesMod.FALL_REDUCTION)
+				.add(AttributesMod.BOW_PROJECTILE_SPEED)
+				.add(AttributesMod.CROSSBOW_PROJECTILE_SPEED);
 	}
 
 	@ModifyVariable(
