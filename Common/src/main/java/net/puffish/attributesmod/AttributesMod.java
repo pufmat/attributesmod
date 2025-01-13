@@ -222,6 +222,20 @@ public class AttributesMod {
 			DynamicEntityAttribute.create(FALL_REDUCTION_ID).setTracked(true)
 	);
 
+	public static final Identifier BOW_PROJECTILE_SPEED_ID
+			= AttributesMod.createIdentifier("bow_projectile_speed");
+	public static final RegistryEntry<EntityAttribute>  BOW_PROJECTILE_SPEED = registerAttribute(
+			BOW_PROJECTILE_SPEED_ID,
+			DynamicEntityAttribute.create(BOW_PROJECTILE_SPEED_ID).setTracked(true)
+	);
+
+	public static final Identifier CROSSBOW_PROJECTILE_SPEED_ID
+			= AttributesMod.createIdentifier("crossbow_projectile_speed");
+	public static final RegistryEntry<EntityAttribute>  CROSSBOW_PROJECTILE_SPEED = registerAttribute(
+			CROSSBOW_PROJECTILE_SPEED_ID,
+			DynamicEntityAttribute.create(CROSSBOW_PROJECTILE_SPEED_ID).setTracked(true)
+	);
+
 
 	public static void setup() {
 
