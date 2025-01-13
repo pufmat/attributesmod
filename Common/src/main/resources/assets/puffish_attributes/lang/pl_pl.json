@@ -27,5 +27,7 @@
 	"attribute.puffish_attributes.natural_regeneration": "Naturalna regeneracja",
 	"attribute.puffish_attributes.stealth": "Skradanie się",
 	"attribute.puffish_attributes.life_steal": "Kradzież życia",
-	"attribute.puffish_attributes.fall_reduction": "Redukcja upadku"
+	"attribute.puffish_attributes.fall_reduction": "Redukcja upadku",
+	"attribute.puffish_attributes.bow_projectile_speed": "Prędkość pocisku łuku",
+	"attribute.puffish_attributes.crossbow_projectile_speed": "Prędkość pocisku kuszy"
 }

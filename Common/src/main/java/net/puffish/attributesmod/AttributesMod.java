@@ -190,6 +190,18 @@ public class AttributesMod {
 			FALL_REDUCTION_ID
 	).setTracked(true);
 
+	public static final Identifier BOW_PROJECTILE_SPEED_ID
+			= AttributesMod.createIdentifier("bow_projectile_speed");
+	public static final EntityAttribute BOW_PROJECTILE_SPEED = DynamicEntityAttribute.create(
+			BOW_PROJECTILE_SPEED_ID
+	).setTracked(true);
+
+	public static final Identifier CROSSBOW_PROJECTILE_SPEED_ID
+			= AttributesMod.createIdentifier("crossbow_projectile_speed");
+	public static final EntityAttribute CROSSBOW_PROJECTILE_SPEED = DynamicEntityAttribute.create(
+			CROSSBOW_PROJECTILE_SPEED_ID
+	).setTracked(true);
+
 
 	public static void setup(Registrar registrar) {
 		registerAttribute(registrar, STAMINA_ID, STAMINA);
@@ -221,6 +233,8 @@ public class AttributesMod {
 		registerAttribute(registrar, STEALTH_ID, STEALTH);
 		registerAttribute(registrar, LIFE_STEAL_ID, LIFE_STEAL);
 		registerAttribute(registrar, FALL_REDUCTION_ID, FALL_REDUCTION);
+		registerAttribute(registrar, BOW_PROJECTILE_SPEED_ID, BOW_PROJECTILE_SPEED);
+		registerAttribute(registrar, CROSSBOW_PROJECTILE_SPEED_ID, CROSSBOW_PROJECTILE_SPEED);
 	}
 
 	public static Identifier createIdentifier(String path) {
