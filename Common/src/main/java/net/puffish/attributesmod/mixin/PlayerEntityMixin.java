@@ -1,5 +1,6 @@
 package net.puffish.attributesmod.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -18,8 +19,11 @@ public abstract class PlayerEntityMixin {
 
 	private static final double VANILLA_KNOCKBACK = 0.4;
 
-	@ModifyReturnValue(method = "createPlayerAttributes", at = @At("RETURN"))
-	private static DefaultAttributeContainer.Builder modifyReturnValueAtCreatePlayerAttributes(DefaultAttributeContainer.Builder builder) {
+	@ModifyExpressionValue(
+			method = "createPlayerAttributes",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;createLivingAttributes()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;")
+	)
+	private static DefaultAttributeContainer.Builder modifyExpressionValueAtCreateLivingAttributes(DefaultAttributeContainer.Builder builder) {
 		return builder
 				.add(AttributesMod.STAMINA)
 				.add(AttributesMod.FORTUNE)
