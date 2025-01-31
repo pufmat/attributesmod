@@ -1,5 +1,6 @@
 package net.puffish.attributesmod.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -18,8 +19,11 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(value = LivingEntity.class, priority = 1100)
 public abstract class LivingEntityMixin {
 
-	@ModifyReturnValue(method = "createLivingAttributes", at = @At("RETURN"))
-	private static DefaultAttributeContainer.Builder modifyReturnValueAtCreateLivingAttributes(DefaultAttributeContainer.Builder builder) {
+	@ModifyExpressionValue(
+			method = "createLivingAttributes",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/attribute/DefaultAttributeContainer;builder()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;")
+	)
+	private static DefaultAttributeContainer.Builder modifyExpressionValueAtBuilder(DefaultAttributeContainer.Builder builder) {
 		return builder
 				.add(AttributesMod.MAGIC_DAMAGE)
 				.add(AttributesMod.MELEE_DAMAGE)
