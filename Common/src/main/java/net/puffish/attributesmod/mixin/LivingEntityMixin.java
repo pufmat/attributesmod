@@ -185,10 +185,10 @@ public abstract class LivingEntityMixin {
 				dmShred.withNegative(AttributesMod.MAGIC_RESISTANCE_SHRED, attacker);
 			} else {
 				if (kind.isProjectile()) {
-					dmShred.withNegative(AttributesMod.MAGIC_RESISTANCE_SHRED, attacker);
+					dmShred.withNegative(AttributesMod.RANGED_RESISTANCE_SHRED, attacker);
 				}
 				if (kind.isMelee()) {
-					dmShred.withNegative(AttributesMod.MAGIC_RESISTANCE_SHRED, attacker);
+					dmShred.withNegative(AttributesMod.MELEE_RESISTANCE_SHRED, attacker);
 				}
 			}
 
