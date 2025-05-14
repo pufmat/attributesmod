@@ -2,10 +2,15 @@ package net.puffish.attributesmod.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.math.MathHelper;
 import net.puffish.attributesmod.AttributesMod;
 import net.puffish.attributesmod.api.DynamicModification;
@@ -74,5 +79,42 @@ public abstract class PlayerEntityMixin {
 				.withPositive(AttributesMod.SPRINTING_SPEED, player)
 				.applyTo(speed);
 	}
+
+	@WrapOperation(
+			method = {
+					"getBlockBreakingSpeed", // Fabric
+					"getDestroySpeed" // NeoForge
+			},
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/item/ItemStack;getMiningSpeedMultiplier(Lnet/minecraft/block/BlockState;)F"
+			)
+	)
+	private float wrapOperationAtGetMiningSpeedMultiplier(ItemStack itemStack, BlockState blockState, Operation<Float> operation) {
+		var speed = operation.call(itemStack, blockState);
+
+		// This check is required to not break vanilla enchantments behavior
+		if (speed <= 1.0f) {
+			return speed;
+		}
+
+		var player = (PlayerEntity) (Object) this;
+
+		var dm = DynamicModification.create();
+
+		if (itemStack.isIn(ItemTags.PICKAXES)) {
+			dm.withPositive(AttributesMod.PICKAXE_SPEED, player);
+		}
+		if (itemStack.isIn(ItemTags.AXES)) {
+			dm.withPositive(AttributesMod.AXE_SPEED, player);
+		}
+		if (itemStack.isIn(ItemTags.SHOVELS)) {
+			dm.withPositive(AttributesMod.SHOVEL_SPEED, player);
+		}
+		dm.withPositive(AttributesMod.MINING_SPEED, player);
+
+		return dm.applyTo(speed);
+	}
+
 
 }
