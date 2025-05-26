@@ -152,10 +152,13 @@ public abstract class LivingEntityMixin {
 	}
 
 	@ModifyReturnValue(
-			method = "modifyAppliedDamage",
+			method = "applyArmorToDamage",
 			at = @At("TAIL")
 	)
 	private float injectAtModifyAppliedDamage(float damage, @Local(argsOnly = true) DamageSource source) {
+		if (source.isUnblockable()) {
+			return damage;
+		}
 		if (damage > Float.MAX_VALUE / 3.0f) {
 			return damage;
 		}
