@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.puffish.attributesmod.AttributesMod;
 import net.puffish.attributesmod.api.DynamicModification;
 import net.puffish.attributesmod.util.DamageKind;
@@ -153,10 +154,13 @@ public abstract class LivingEntityMixin {
 	}
 
 	@ModifyReturnValue(
-			method = "modifyAppliedDamage",
+			method = "applyArmorToDamage",
 			at = @At("TAIL")
 	)
 	private float injectAtModifyAppliedDamage(float damage, @Local(argsOnly = true) DamageSource source) {
+		if (source.isIn(DamageTypeTags.BYPASSES_EFFECTS)) {
+			return damage;
+		}
 		if (damage > Float.MAX_VALUE / 3.0f) {
 			return damage;
 		}
