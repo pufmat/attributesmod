@@ -19,7 +19,10 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 	}
 
 	@ModifyExpressionValue(
-			method = "updateResult",
+			method = {
+					"updateResult", // Fabric
+					"createResultInternal" // NeoForge
+			},
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/util/math/MathHelper;clamp(JJJ)J"
