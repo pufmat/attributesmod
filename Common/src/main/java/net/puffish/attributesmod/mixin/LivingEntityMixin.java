@@ -144,7 +144,7 @@ public abstract class LivingEntityMixin {
 			argsOnly = true,
 			ordinal = 0
 	)
-	private float modifyVariableAtComputeFallDamage(float fallDistance) {
+	private double modifyVariableAtComputeFallDamage(double fallDistance) {
 		return DynamicModification.create()
 				.withNegative(AttributesMod.FALL_REDUCTION, ((LivingEntity) (Object) this))
 				.applyTo(fallDistance)
