@@ -6,6 +6,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Tameable;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.damage.DamageSource;
 import net.puffish.attributesmod.AttributesMod;
@@ -70,6 +71,12 @@ public abstract class LivingEntityMixin {
 				}
 				if (kind.isMelee()) {
 					dm.withPositive(AttributesMod.MELEE_DAMAGE, attacker);
+				}
+			}
+
+			if (attacker instanceof Tameable tameable) {
+				if (tameable.getOwner() instanceof LivingEntity livingOwner) {
+					dm.withPositive(AttributesMod.TAMED_DAMAGE, livingOwner);
 				}
 			}
 
@@ -176,6 +183,12 @@ public abstract class LivingEntityMixin {
 			}
 			if (kind.isMelee()) {
 				dmResistance.withNegative(AttributesMod.MELEE_RESISTANCE, entity);
+			}
+		}
+
+		if (entity instanceof Tameable tameable) {
+			if (tameable.getOwner() instanceof LivingEntity livingOwner) {
+				dmResistance.withNegative(AttributesMod.TAMED_RESISTANCE, livingOwner);
 			}
 		}
 
