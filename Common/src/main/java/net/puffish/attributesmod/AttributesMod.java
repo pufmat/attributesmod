@@ -47,6 +47,13 @@ public class AttributesMod {
 			DynamicEntityAttribute.create(RANGED_DAMAGE_ID).setTracked(true)
 	);
 
+	public static final Identifier TAMED_DAMAGE_ID
+			= AttributesMod.createIdentifier("tamed_damage");
+	public static final RegistryEntry<EntityAttribute> TAMED_DAMAGE = registerAttribute(
+			TAMED_DAMAGE_ID,
+			DynamicEntityAttribute.create(TAMED_DAMAGE_ID).setTracked(true)
+	);
+
 	public static final Identifier FORTUNE_ID
 			= AttributesMod.createIdentifier("fortune");
 	public static final RegistryEntry<EntityAttribute> FORTUNE = registerAttribute(
@@ -94,6 +101,13 @@ public class AttributesMod {
 	public static final RegistryEntry<EntityAttribute> RANGED_RESISTANCE = registerAttribute(
 			RANGED_RESISTANCE_ID,
 			DynamicEntityAttribute.create(RANGED_RESISTANCE_ID).setTracked(true)
+	);
+
+	public static final Identifier TAMED_RESISTANCE_ID
+			= AttributesMod.createIdentifier("tamed_resistance");
+	public static final RegistryEntry<EntityAttribute> TAMED_RESISTANCE = registerAttribute(
+			TAMED_RESISTANCE_ID,
+			DynamicEntityAttribute.create(TAMED_RESISTANCE_ID).setTracked(true)
 	);
 
 	public static final Identifier MINING_SPEED_ID

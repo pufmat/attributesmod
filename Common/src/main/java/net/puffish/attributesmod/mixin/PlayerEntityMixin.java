@@ -39,7 +39,9 @@ public abstract class PlayerEntityMixin {
 				.add(AttributesMod.SPRINTING_SPEED)
 				.add(AttributesMod.KNOCKBACK)
 				.add(AttributesMod.REPAIR_COST)
-				.add(AttributesMod.NATURAL_REGENERATION);
+				.add(AttributesMod.NATURAL_REGENERATION)
+				.add(AttributesMod.TAMED_DAMAGE)
+				.add(AttributesMod.TAMED_RESISTANCE);
 	}
 
 	@Inject(
