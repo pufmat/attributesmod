@@ -40,6 +40,12 @@ public class AttributesMod {
 			RANGED_DAMAGE_ID
 	).setTracked(true);
 
+	public static final Identifier TAMED_DAMAGE_ID
+			= AttributesMod.createIdentifier("tamed_damage");
+	public static final EntityAttribute TAMED_DAMAGE = DynamicEntityAttribute.create(
+			TAMED_DAMAGE_ID
+	).setTracked(true);
+
 	public static final Identifier FORTUNE_ID
 			= AttributesMod.createIdentifier("fortune");
 	public static final EntityAttribute FORTUNE = DynamicEntityAttribute.create(
@@ -80,6 +86,12 @@ public class AttributesMod {
 			= AttributesMod.createIdentifier("ranged_resistance");
 	public static final EntityAttribute RANGED_RESISTANCE = DynamicEntityAttribute.create(
 			RANGED_RESISTANCE_ID
+	).setTracked(true);
+
+	public static final Identifier TAMED_RESISTANCE_ID
+			= AttributesMod.createIdentifier("tamed_resistance");
+	public static final EntityAttribute TAMED_RESISTANCE = DynamicEntityAttribute.create(
+			TAMED_RESISTANCE_ID
 	).setTracked(true);
 
 	public static final Identifier MINING_SPEED_ID
@@ -208,6 +220,7 @@ public class AttributesMod {
 		registerAttribute(registrar, MAGIC_DAMAGE_ID, MAGIC_DAMAGE);
 		registerAttribute(registrar, MELEE_DAMAGE_ID, MELEE_DAMAGE);
 		registerAttribute(registrar, RANGED_DAMAGE_ID, RANGED_DAMAGE);
+		registerAttribute(registrar, TAMED_DAMAGE_ID, TAMED_DAMAGE);
 		registerAttribute(registrar, FORTUNE_ID, FORTUNE);
 		registerAttribute(registrar, HEALING_ID, HEALING);
 		registerAttribute(registrar, JUMP_ID, JUMP);
@@ -215,6 +228,7 @@ public class AttributesMod {
 		registerAttribute(registrar, MAGIC_RESISTANCE_ID, MAGIC_RESISTANCE);
 		registerAttribute(registrar, MELEE_RESISTANCE_ID, MELEE_RESISTANCE);
 		registerAttribute(registrar, RANGED_RESISTANCE_ID, RANGED_RESISTANCE);
+		registerAttribute(registrar, TAMED_RESISTANCE_ID, TAMED_RESISTANCE);
 		registerAttribute(registrar, MINING_SPEED_ID, MINING_SPEED);
 		registerAttribute(registrar, PICKAXE_SPEED_ID, PICKAXE_SPEED);
 		registerAttribute(registrar, AXE_SPEED_ID, AXE_SPEED);
