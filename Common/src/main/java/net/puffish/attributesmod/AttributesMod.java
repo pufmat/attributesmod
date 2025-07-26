@@ -214,6 +214,12 @@ public class AttributesMod {
 			CROSSBOW_PROJECTILE_SPEED_ID
 	).setTracked(true);
 
+	public static final Identifier EXPERIENCE_ID
+			= AttributesMod.createIdentifier("experience");
+	public static final EntityAttribute EXPERIENCE = DynamicEntityAttribute.create(
+			EXPERIENCE_ID
+	).setTracked(true);
+
 
 	public static void setup(Registrar registrar) {
 		registerAttribute(registrar, STAMINA_ID, STAMINA);
@@ -249,6 +255,7 @@ public class AttributesMod {
 		registerAttribute(registrar, FALL_REDUCTION_ID, FALL_REDUCTION);
 		registerAttribute(registrar, BOW_PROJECTILE_SPEED_ID, BOW_PROJECTILE_SPEED);
 		registerAttribute(registrar, CROSSBOW_PROJECTILE_SPEED_ID, CROSSBOW_PROJECTILE_SPEED);
+		registerAttribute(registrar, EXPERIENCE_ID, EXPERIENCE);
 	}
 
 	public static Identifier createIdentifier(String path) {
