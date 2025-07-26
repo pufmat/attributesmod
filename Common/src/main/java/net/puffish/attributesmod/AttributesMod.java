@@ -250,6 +250,13 @@ public class AttributesMod {
 			DynamicEntityAttribute.create(CROSSBOW_PROJECTILE_SPEED_ID).setTracked(true)
 	);
 
+	public static final Identifier EXPERIENCE_ID
+			= AttributesMod.createIdentifier("experience");
+	public static final RegistryEntry<EntityAttribute> EXPERIENCE = registerAttribute(
+			EXPERIENCE_ID,
+			DynamicEntityAttribute.create(EXPERIENCE_ID).setTracked(true)
+	);
+
 
 	public static void setup() {
 
