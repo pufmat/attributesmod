@@ -11,6 +11,7 @@
 		"DamageTrackerMixin",
 		"EntityAttributeInstanceInvoker",
 		"EntityAttributeInstanceMixin",
+		"ExperienceOrbEntityMixin",
 		"HungerManagerMixin",
 		"LivingEntityMixin",
 		"PlayerEntityMixin",
