@@ -2,6 +2,7 @@ package net.puffish.attributesmod.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -161,11 +162,12 @@ public abstract class LivingEntityMixin {
 				.relativeTo(1.0f) * 10.0f;
 	}
 
-	@ModifyReturnValue(
-			method = "applyArmorToDamage",
-			at = @At("TAIL")
+	@WrapMethod(
+			method = "applyArmorToDamage"
 	)
-	private float injectAtModifyAppliedDamage(float damage, @Local(argsOnly = true) DamageSource source) {
+	private float wrapMethodApplyArmorToDamage(DamageSource source, float amount, Operation<Float> original) {
+		var damage = original.call(source, amount);
+
 		if (source.isIn(DamageTypeTags.BYPASSES_EFFECTS)) {
 			return damage;
 		}
