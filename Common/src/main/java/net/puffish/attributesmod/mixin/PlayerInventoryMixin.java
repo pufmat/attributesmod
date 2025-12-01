@@ -5,8 +5,8 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
-import net.puffish.attributesmod.AttributesMod;
 import net.puffish.attributesmod.api.DynamicModification;
+import net.puffish.attributesmod.api.PuffishAttributes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -26,15 +26,15 @@ public class PlayerInventoryMixin {
 
 		var dm = DynamicModification.create();
 		if (item instanceof PickaxeItem) {
-			dm.withPositive(AttributesMod.PICKAXE_SPEED, player);
+			dm.withPositive(PuffishAttributes.PICKAXE_SPEED, player);
 		}
 		if (item instanceof AxeItem) {
-			dm.withPositive(AttributesMod.AXE_SPEED, player);
+			dm.withPositive(PuffishAttributes.AXE_SPEED, player);
 		}
 		if (item instanceof ShovelItem) {
-			dm.withPositive(AttributesMod.SHOVEL_SPEED, player);
+			dm.withPositive(PuffishAttributes.SHOVEL_SPEED, player);
 		}
-		dm.withPositive(AttributesMod.MINING_SPEED, player);
+		dm.withPositive(PuffishAttributes.MINING_SPEED, player);
 
 		return dm.applyTo(speed);
 	}
