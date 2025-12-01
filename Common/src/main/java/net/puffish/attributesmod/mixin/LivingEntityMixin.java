@@ -10,8 +10,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Tameable;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.damage.DamageSource;
-import net.puffish.attributesmod.AttributesMod;
 import net.puffish.attributesmod.api.DynamicModification;
+import net.puffish.attributesmod.api.PuffishAttributes;
 import net.puffish.attributesmod.util.DamageKind;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,27 +26,27 @@ public abstract class LivingEntityMixin {
 	)
 	private static DefaultAttributeContainer.Builder modifyExpressionValueAtBuilder(DefaultAttributeContainer.Builder builder) {
 		return builder
-				.add(AttributesMod.MAGIC_DAMAGE)
-				.add(AttributesMod.MELEE_DAMAGE)
-				.add(AttributesMod.RANGED_DAMAGE)
-				.add(AttributesMod.HEALING)
-				.add(AttributesMod.JUMP)
-				.add(AttributesMod.RESISTANCE)
-				.add(AttributesMod.MAGIC_RESISTANCE)
-				.add(AttributesMod.MELEE_RESISTANCE)
-				.add(AttributesMod.RANGED_RESISTANCE)
-				.add(AttributesMod.ARMOR_SHRED)
-				.add(AttributesMod.TOUGHNESS_SHRED)
-				.add(AttributesMod.PROTECTION_SHRED)
-				.add(AttributesMod.RESISTANCE_SHRED)
-				.add(AttributesMod.MAGIC_RESISTANCE_SHRED)
-				.add(AttributesMod.MELEE_RESISTANCE_SHRED)
-				.add(AttributesMod.RANGED_RESISTANCE_SHRED)
-				.add(AttributesMod.STEALTH)
-				.add(AttributesMod.LIFE_STEAL)
-				.add(AttributesMod.FALL_REDUCTION)
-				.add(AttributesMod.BOW_PROJECTILE_SPEED)
-				.add(AttributesMod.CROSSBOW_PROJECTILE_SPEED);
+				.add(PuffishAttributes.MAGIC_DAMAGE)
+				.add(PuffishAttributes.MELEE_DAMAGE)
+				.add(PuffishAttributes.RANGED_DAMAGE)
+				.add(PuffishAttributes.HEALING)
+				.add(PuffishAttributes.JUMP)
+				.add(PuffishAttributes.RESISTANCE)
+				.add(PuffishAttributes.MAGIC_RESISTANCE)
+				.add(PuffishAttributes.MELEE_RESISTANCE)
+				.add(PuffishAttributes.RANGED_RESISTANCE)
+				.add(PuffishAttributes.ARMOR_SHRED)
+				.add(PuffishAttributes.TOUGHNESS_SHRED)
+				.add(PuffishAttributes.PROTECTION_SHRED)
+				.add(PuffishAttributes.RESISTANCE_SHRED)
+				.add(PuffishAttributes.MAGIC_RESISTANCE_SHRED)
+				.add(PuffishAttributes.MELEE_RESISTANCE_SHRED)
+				.add(PuffishAttributes.RANGED_RESISTANCE_SHRED)
+				.add(PuffishAttributes.STEALTH)
+				.add(PuffishAttributes.LIFE_STEAL)
+				.add(PuffishAttributes.FALL_REDUCTION)
+				.add(PuffishAttributes.BOW_PROJECTILE_SPEED)
+				.add(PuffishAttributes.CROSSBOW_PROJECTILE_SPEED);
 	}
 
 	@ModifyVariable(
@@ -65,19 +65,19 @@ public abstract class LivingEntityMixin {
 
 			var kind = DamageKind.of(source);
 			if (kind.isMagic()) {
-				dm.withPositive(AttributesMod.MAGIC_DAMAGE, attacker);
+				dm.withPositive(PuffishAttributes.MAGIC_DAMAGE, attacker);
 			} else {
 				if (kind.isProjectile()) {
-					dm.withPositive(AttributesMod.RANGED_DAMAGE, attacker);
+					dm.withPositive(PuffishAttributes.RANGED_DAMAGE, attacker);
 				}
 				if (kind.isMelee()) {
-					dm.withPositive(AttributesMod.MELEE_DAMAGE, attacker);
+					dm.withPositive(PuffishAttributes.MELEE_DAMAGE, attacker);
 				}
 			}
 
 			if (attacker instanceof Tameable tameable) {
 				if (tameable.getOwner() instanceof LivingEntity livingOwner) {
-					dm.withPositive(AttributesMod.TAMED_DAMAGE, livingOwner);
+					dm.withPositive(PuffishAttributes.TAMED_DAMAGE, livingOwner);
 				}
 			}
 
@@ -94,10 +94,10 @@ public abstract class LivingEntityMixin {
 	private float wrapOperationAtApplyArmorToDamage(float damage, float armor, float toughness, Operation<Float> operation, @Local(argsOnly = true) DamageSource source) {
 		if (source.getAttacker() instanceof LivingEntity attacker) {
 			armor = Math.max(0.0f, DynamicModification.create()
-					.withNegative(AttributesMod.ARMOR_SHRED, attacker)
+					.withNegative(PuffishAttributes.ARMOR_SHRED, attacker)
 					.applyTo(armor));
 			toughness = Math.max(0.0f, DynamicModification.create()
-					.withNegative(AttributesMod.TOUGHNESS_SHRED, attacker)
+					.withNegative(PuffishAttributes.TOUGHNESS_SHRED, attacker)
 					.applyTo(toughness));
 		}
 
@@ -111,7 +111,7 @@ public abstract class LivingEntityMixin {
 	private float wrapOperationAtModifyAppliedDamage(float damageDealt, float protection, Operation<Float> original, @Local(argsOnly = true) DamageSource source) {
 		if (source.getAttacker() instanceof LivingEntity attacker) {
 			protection = Math.max(0.0f, DynamicModification.create()
-					.withNegative(AttributesMod.PROTECTION_SHRED, attacker)
+					.withNegative(PuffishAttributes.PROTECTION_SHRED, attacker)
 					.applyTo(protection));
 		}
 
@@ -130,7 +130,7 @@ public abstract class LivingEntityMixin {
 		}
 
 		return DynamicModification.create()
-				.withPositive(AttributesMod.HEALING, ((LivingEntity) (Object) this))
+				.withPositive(PuffishAttributes.HEALING, ((LivingEntity) (Object) this))
 				.applyTo(amount);
 	}
 
@@ -140,7 +140,7 @@ public abstract class LivingEntityMixin {
 	)
 	private float injectAtGetJumpVelocity(float jump) {
 		return DynamicModification.create()
-				.withPositive(AttributesMod.JUMP, ((LivingEntity) (Object) this))
+				.withPositive(PuffishAttributes.JUMP, ((LivingEntity) (Object) this))
 				.applyTo(jump);
 	}
 
@@ -152,10 +152,10 @@ public abstract class LivingEntityMixin {
 	)
 	private float modifyVariableAtComputeFallDamage(float fallDistance) {
 		return DynamicModification.create()
-				.withNegative(AttributesMod.FALL_REDUCTION, ((LivingEntity) (Object) this))
+				.withNegative(PuffishAttributes.FALL_REDUCTION, ((LivingEntity) (Object) this))
 				.applyTo(fallDistance)
 				- DynamicModification.create()
-				.withPositive(AttributesMod.JUMP, ((LivingEntity) (Object) this))
+				.withPositive(PuffishAttributes.JUMP, ((LivingEntity) (Object) this))
 				.relativeTo(1.0f) * 10.0f;
 	}
 
@@ -176,21 +176,21 @@ public abstract class LivingEntityMixin {
 		var kind = DamageKind.of(source);
 
 		var dmResistance = DynamicModification.create();
-		dmResistance.withNegative(AttributesMod.RESISTANCE, entity);
+		dmResistance.withNegative(PuffishAttributes.RESISTANCE, entity);
 		if (kind.isMagic()) {
-			dmResistance.withNegative(AttributesMod.MAGIC_RESISTANCE, entity);
+			dmResistance.withNegative(PuffishAttributes.MAGIC_RESISTANCE, entity);
 		} else {
 			if (kind.isProjectile()) {
-				dmResistance.withNegative(AttributesMod.RANGED_RESISTANCE, entity);
+				dmResistance.withNegative(PuffishAttributes.RANGED_RESISTANCE, entity);
 			}
 			if (kind.isMelee()) {
-				dmResistance.withNegative(AttributesMod.MELEE_RESISTANCE, entity);
+				dmResistance.withNegative(PuffishAttributes.MELEE_RESISTANCE, entity);
 			}
 		}
 
 		if (entity instanceof Tameable tameable) {
 			if (tameable.getOwner() instanceof LivingEntity livingOwner) {
-				dmResistance.withNegative(AttributesMod.TAMED_RESISTANCE, livingOwner);
+				dmResistance.withNegative(PuffishAttributes.TAMED_RESISTANCE, livingOwner);
 			}
 		}
 
@@ -198,15 +198,15 @@ public abstract class LivingEntityMixin {
 
 		if (source.getAttacker() instanceof LivingEntity attacker) {
 			var dmShred = DynamicModification.create();
-			dmShred.withNegative(AttributesMod.RESISTANCE_SHRED, attacker);
+			dmShred.withNegative(PuffishAttributes.RESISTANCE_SHRED, attacker);
 			if (kind.isMagic()) {
-				dmShred.withNegative(AttributesMod.MAGIC_RESISTANCE_SHRED, attacker);
+				dmShred.withNegative(PuffishAttributes.MAGIC_RESISTANCE_SHRED, attacker);
 			} else {
 				if (kind.isProjectile()) {
-					dmShred.withNegative(AttributesMod.RANGED_RESISTANCE_SHRED, attacker);
+					dmShred.withNegative(PuffishAttributes.RANGED_RESISTANCE_SHRED, attacker);
 				}
 				if (kind.isMelee()) {
-					dmShred.withNegative(AttributesMod.MELEE_RESISTANCE_SHRED, attacker);
+					dmShred.withNegative(PuffishAttributes.MELEE_RESISTANCE_SHRED, attacker);
 				}
 			}
 

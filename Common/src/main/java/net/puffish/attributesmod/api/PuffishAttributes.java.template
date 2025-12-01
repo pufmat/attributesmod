@@ -1,0 +1,15 @@
+package net.puffish.attributesmod.api;
+
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.util.Identifier;
+import net.puffish.attributesmod.util.DeferredSetup;
+
+public class PuffishAttributes {
+	private PuffishAttributes() { }
+
+	public static final Identifier STAMINA_ID = DeferredSetup.createIdentifier("stamina");
+	public static final EntityAttribute STAMINA = DeferredSetup.createClampedAttribute(STAMINA_ID, 4.0, 0.0, 1024.0).setTracked(true);
+
+	public static final Identifier ${ATTRIBUTE}_ID = DeferredSetup.createIdentifier("${attribute}");
+	public static final EntityAttribute ${ATTRIBUTE} = DeferredSetup.createDynamicAttribute(${ATTRIBUTE}_ID).setTracked(true);
+}

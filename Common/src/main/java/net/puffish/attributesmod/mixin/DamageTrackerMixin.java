@@ -3,8 +3,8 @@ package net.puffish.attributesmod.mixin;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageTracker;
-import net.puffish.attributesmod.AttributesMod;
 import net.puffish.attributesmod.api.DynamicModification;
+import net.puffish.attributesmod.api.PuffishAttributes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,7 +20,7 @@ public class DamageTrackerMixin {
 	private void injectAtAttack(DamageSource damageSource, float originalHealth, float damage, CallbackInfo ci) {
 		if (damageSource.getAttacker() instanceof LivingEntity attacker) {
 			var lifeSteal = DynamicModification.create()
-					.withPositive(AttributesMod.LIFE_STEAL, attacker)
+					.withPositive(PuffishAttributes.LIFE_STEAL, attacker)
 					.relativeTo(damage);
 
 			if (lifeSteal > 0) {
