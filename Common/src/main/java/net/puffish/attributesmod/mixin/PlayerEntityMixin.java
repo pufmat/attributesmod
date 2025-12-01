@@ -12,8 +12,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.math.MathHelper;
-import net.puffish.attributesmod.AttributesMod;
 import net.puffish.attributesmod.api.DynamicModification;
+import net.puffish.attributesmod.api.PuffishAttributes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,19 +30,19 @@ public abstract class PlayerEntityMixin {
 	)
 	private static DefaultAttributeContainer.Builder modifyExpressionValueAtCreateLivingAttributes(DefaultAttributeContainer.Builder builder) {
 		return builder
-				.add(AttributesMod.STAMINA)
-				.add(AttributesMod.FORTUNE)
-				.add(AttributesMod.MINING_SPEED)
-				.add(AttributesMod.PICKAXE_SPEED)
-				.add(AttributesMod.AXE_SPEED)
-				.add(AttributesMod.SHOVEL_SPEED)
-				.add(AttributesMod.SPRINTING_SPEED)
-				.add(AttributesMod.KNOCKBACK)
-				.add(AttributesMod.REPAIR_COST)
-				.add(AttributesMod.NATURAL_REGENERATION)
-				.add(AttributesMod.TAMED_DAMAGE)
-				.add(AttributesMod.TAMED_RESISTANCE)
-				.add(AttributesMod.EXPERIENCE);
+				.add(PuffishAttributes.STAMINA)
+				.add(PuffishAttributes.FORTUNE)
+				.add(PuffishAttributes.MINING_SPEED)
+				.add(PuffishAttributes.PICKAXE_SPEED)
+				.add(PuffishAttributes.AXE_SPEED)
+				.add(PuffishAttributes.SHOVEL_SPEED)
+				.add(PuffishAttributes.SPRINTING_SPEED)
+				.add(PuffishAttributes.KNOCKBACK)
+				.add(PuffishAttributes.REPAIR_COST)
+				.add(PuffishAttributes.NATURAL_REGENERATION)
+				.add(PuffishAttributes.TAMED_DAMAGE)
+				.add(PuffishAttributes.TAMED_RESISTANCE)
+				.add(PuffishAttributes.EXPERIENCE);
 	}
 
 	@Inject(
@@ -56,7 +56,7 @@ public abstract class PlayerEntityMixin {
 		var player = (PlayerEntity) (Object) this;
 
 		var knockback = DynamicModification.create()
-				.withPositive(AttributesMod.KNOCKBACK, player)
+				.withPositive(PuffishAttributes.KNOCKBACK, player)
 				.applyTo(VANILLA_KNOCKBACK) - VANILLA_KNOCKBACK;
 
 		var yaw = player.getYaw() * MathHelper.RADIANS_PER_DEGREE;
@@ -79,7 +79,7 @@ public abstract class PlayerEntityMixin {
 		}
 
 		return DynamicModification.create()
-				.withPositive(AttributesMod.SPRINTING_SPEED, player)
+				.withPositive(PuffishAttributes.SPRINTING_SPEED, player)
 				.applyTo(speed);
 	}
 
@@ -106,15 +106,15 @@ public abstract class PlayerEntityMixin {
 		var dm = DynamicModification.create();
 
 		if (itemStack.isIn(ItemTags.PICKAXES)) {
-			dm.withPositive(AttributesMod.PICKAXE_SPEED, player);
+			dm.withPositive(PuffishAttributes.PICKAXE_SPEED, player);
 		}
 		if (itemStack.isIn(ItemTags.AXES)) {
-			dm.withPositive(AttributesMod.AXE_SPEED, player);
+			dm.withPositive(PuffishAttributes.AXE_SPEED, player);
 		}
 		if (itemStack.isIn(ItemTags.SHOVELS)) {
-			dm.withPositive(AttributesMod.SHOVEL_SPEED, player);
+			dm.withPositive(PuffishAttributes.SHOVEL_SPEED, player);
 		}
-		dm.withPositive(AttributesMod.MINING_SPEED, player);
+		dm.withPositive(PuffishAttributes.MINING_SPEED, player);
 
 		return dm.applyTo(speed);
 	}
