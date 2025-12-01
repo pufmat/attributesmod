@@ -1,34 +1,5 @@
 {
 	"values": [
-		"puffish_attributes:magic_damage",
-		"puffish_attributes:melee_damage",
-		"puffish_attributes:ranged_damage",
-		"puffish_attributes:fortune",
-		"puffish_attributes:healing",
-		"puffish_attributes:jump",
-		"puffish_attributes:resistance",
-		"puffish_attributes:magic_resistance",
-		"puffish_attributes:melee_resistance",
-		"puffish_attributes:ranged_resistance",
-		"puffish_attributes:mining_speed",
-		"puffish_attributes:pickaxe_speed",
-		"puffish_attributes:axe_speed",
-		"puffish_attributes:shovel_speed",
-		"puffish_attributes:sprinting_speed",
-		"puffish_attributes:knockback",
-		"puffish_attributes:repair_cost",
-		"puffish_attributes:armor_shred",
-		"puffish_attributes:toughness_shred",
-		"puffish_attributes:protection_shred",
-		"puffish_attributes:resistance_shred",
-		"puffish_attributes:magic_resistance_shred",
-		"puffish_attributes:melee_resistance_shred",
-		"puffish_attributes:ranged_resistance_shred",
-		"puffish_attributes:natural_regeneration",
-		"puffish_attributes:stealth",
-		"puffish_attributes:life_steal",
-		"puffish_attributes:fall_reduction",
-		"puffish_attributes:bow_projectile_speed",
-		"puffish_attributes:crossbow_projectile_speed"
+		"#puffish_attributes:dynamic"
 	]
 }

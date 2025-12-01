@@ -7,8 +7,8 @@ import net.minecraft.screen.ForgingScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.ForgingSlotsManager;
-import net.puffish.attributesmod.AttributesMod;
 import net.puffish.attributesmod.api.DynamicModification;
+import net.puffish.attributesmod.api.PuffishAttributes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -30,7 +30,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 	)
 	private long modifyExpressionValueAtClamp(long value) {
 		return Math.max(1, Math.round(DynamicModification.create()
-				.withPositive(AttributesMod.REPAIR_COST, player)
+				.withPositive(PuffishAttributes.REPAIR_COST, player)
 				.applyTo(value)));
 	}
 }
