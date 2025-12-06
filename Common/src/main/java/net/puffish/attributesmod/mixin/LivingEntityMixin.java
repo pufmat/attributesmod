@@ -10,8 +10,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Tameable;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.item.MaceItem;
+import net.minecraft.item.TridentItem;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.server.world.ServerWorld;
 import net.puffish.attributesmod.api.DynamicModification;
 import net.puffish.attributesmod.api.PuffishAttributes;
 import net.puffish.attributesmod.util.DamageKind;
@@ -31,6 +34,10 @@ public abstract class LivingEntityMixin {
 				.add(PuffishAttributes.MAGIC_DAMAGE)
 				.add(PuffishAttributes.MELEE_DAMAGE)
 				.add(PuffishAttributes.RANGED_DAMAGE)
+				.add(PuffishAttributes.SWORD_DAMAGE)
+				.add(PuffishAttributes.AXE_DAMAGE)
+				.add(PuffishAttributes.TRIDENT_DAMAGE)
+				.add(PuffishAttributes.MACE_DAMAGE)
 				.add(PuffishAttributes.HEALING)
 				.add(PuffishAttributes.JUMP)
 				.add(PuffishAttributes.RESISTANCE)
@@ -64,6 +71,21 @@ public abstract class LivingEntityMixin {
 
 		if (source.getAttacker() instanceof LivingEntity attacker) {
 			var dm = DynamicModification.create();
+
+			var itemStack = attacker.getMainHandStack();
+			var item = itemStack.getItem();
+			if (itemStack.isIn(ItemTags.SWORDS)) {
+				dm.withPositive(PuffishAttributes.SWORD_DAMAGE, attacker);
+			}
+			if (itemStack.isIn(ItemTags.AXES)) {
+				dm.withPositive(PuffishAttributes.AXE_DAMAGE, attacker);
+			}
+			if (item instanceof TridentItem) {
+				dm.withPositive(PuffishAttributes.TRIDENT_DAMAGE, attacker);
+			}
+			if (item instanceof MaceItem) {
+				dm.withPositive(PuffishAttributes.MACE_DAMAGE, attacker);
+			}
 
 			var kind = DamageKind.of(source);
 			if (kind.isMagic()) {
