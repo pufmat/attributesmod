@@ -55,7 +55,18 @@ public abstract class LivingEntityMixin {
 				.add(PuffishAttributes.LIFE_STEAL)
 				.add(PuffishAttributes.FALL_REDUCTION)
 				.add(PuffishAttributes.BOW_PROJECTILE_SPEED)
-				.add(PuffishAttributes.CROSSBOW_PROJECTILE_SPEED);
+				.add(PuffishAttributes.CROSSBOW_PROJECTILE_SPEED)
+				.add(PuffishAttributes.KNOCKBACK);
+	}
+
+	@ModifyReturnValue(
+			method = "getAttackKnockbackAgainst",
+			at = @At("RETURN")
+	)
+	private float modifyReturnValueAtGetAttackKnockbackAgainst(float knockback) {
+		return DynamicModification.create()
+				.withPositive(PuffishAttributes.KNOCKBACK, (LivingEntity) (Object) this)
+				.applyTo(knockback);
 	}
 
 	@ModifyVariable(

@@ -15,12 +15,12 @@ description="Adds more attributes to the game."
 [[dependencies.puffish_attributes]]
 modId="neoforge"
 type="required"
-versionRange="[21.9.14-beta,)"
+versionRange="[21.11.6-beta,)"
 
 [[dependencies.puffish_attributes]]
 modId="minecraft"
 type="required"
-versionRange="[1.21.9,)"
+versionRange="[1.21.11,)"
 
 [[dependencies.puffish_attributes]]
 modId="puffish_skills"
