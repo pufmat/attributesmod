@@ -1,8 +1,10 @@
 package net.puffish.attributesmod.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.puffish.attributesmod.api.DynamicEntityAttribute;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -48,5 +50,17 @@ public class EntityAttributeInstanceMixin {
 		if (type instanceof DynamicEntityAttribute) {
 			ci.cancel();
 		}
+	}
+
+	@ModifyExpressionValue(
+			method = "toNbt",
+			at = @At(
+					value = "FIELD",
+					target = "Lnet/minecraft/entity/attribute/EntityAttributeInstance;baseValue:D",
+					opcode = Opcodes.GETFIELD
+			)
+	)
+	private double modifyExpressionValueAtBaseValue(double original) {
+		return type instanceof DynamicEntityAttribute ? 0 : original;
 	}
 }
