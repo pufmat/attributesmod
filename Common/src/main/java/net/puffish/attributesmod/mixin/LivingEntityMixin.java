@@ -201,26 +201,26 @@ public abstract class LivingEntityMixin {
 		var kind = DamageKind.of(source);
 
 		var dmResistance = DynamicModification.create();
-		dmResistance.withNegative(PuffishAttributes.RESISTANCE, entity);
+		dmResistance.withPositive(PuffishAttributes.RESISTANCE, entity);
 		if (kind.isMagic()) {
-			dmResistance.withNegative(PuffishAttributes.MAGIC_RESISTANCE, entity);
+			dmResistance.withPositive(PuffishAttributes.MAGIC_RESISTANCE, entity);
 		} else {
 			if (kind.isProjectile()) {
-				dmResistance.withNegative(PuffishAttributes.RANGED_RESISTANCE, entity);
+				dmResistance.withPositive(PuffishAttributes.RANGED_RESISTANCE, entity);
 			}
 			if (kind.isMelee()) {
-				dmResistance.withNegative(PuffishAttributes.MELEE_RESISTANCE, entity);
+				dmResistance.withPositive(PuffishAttributes.MELEE_RESISTANCE, entity);
 			}
 		}
 
 		if (entity instanceof Tameable tameable) {
 			var owner = tameable.getOwner();
 			if (owner != null) {
-				dmResistance.withNegative(PuffishAttributes.TAMED_RESISTANCE, owner);
+				dmResistance.withPositive(PuffishAttributes.TAMED_RESISTANCE, owner);
 			}
 		}
 
-		var resistance = damage - dmResistance.applyTo(damage);
+		var resistance = dmResistance.relativeTo(damage);
 
 		if (source.getAttacker() instanceof LivingEntity attacker) {
 			var dmShred = DynamicModification.create();
@@ -236,7 +236,12 @@ public abstract class LivingEntityMixin {
 				}
 			}
 
-			resistance = Math.max(0.0f, dmShred.applyTo(resistance));
+			var shred = dmShred.relativeTo(resistance);
+
+			// shred cannot be greater than resistance
+			shred = Math.min(shred, resistance);
+
+			resistance -= shred;
 		}
 
 		return Math.max(0.0f, damage - resistance);
