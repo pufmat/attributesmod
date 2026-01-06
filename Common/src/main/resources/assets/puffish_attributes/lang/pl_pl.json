@@ -3,6 +3,10 @@
 	"attribute.puffish_attributes.magic_damage": "Obrażenia magiczne",
 	"attribute.puffish_attributes.melee_damage": "Obrażenia w zwarciu",
 	"attribute.puffish_attributes.ranged_damage": "Obrażenia dystansowe",
+	"attribute.puffish_attributes.tamed_damage": "Obrażenia oswojonych",
+	"attribute.puffish_attributes.sword_damage": "Obrażenia miecza",
+	"attribute.puffish_attributes.axe_damage": "Obrażenia siekiery",
+	"attribute.puffish_attributes.trident_damage": "Obrażenia trójzębu",
 	"attribute.puffish_attributes.fortune": "Fortuna",
 	"attribute.puffish_attributes.healing": "Leczenie",
 	"attribute.puffish_attributes.jump": "Skok",
@@ -21,6 +25,7 @@
 	"attribute.puffish_attributes.toughness_shred": "Osłabienie wytrzymałości",
 	"attribute.puffish_attributes.protection_shred": "Osłabienie ochrony",
 	"attribute.puffish_attributes.resistance_shred": "Osłabienie odporności",
+	"attribute.puffish_attributes.tamed_resistance": "Odporność oswojonych",
 	"attribute.puffish_attributes.magic_resistance_shred": "Osłabienie odporności magicznej",
 	"attribute.puffish_attributes.melee_resistance_shred": "Osłabienie odporności w zwarciu",
 	"attribute.puffish_attributes.ranged_resistance_shred": "Osłabienie odporności dystansowej",
@@ -29,5 +34,6 @@
 	"attribute.puffish_attributes.life_steal": "Kradzież życia",
 	"attribute.puffish_attributes.fall_reduction": "Redukcja upadku",
 	"attribute.puffish_attributes.bow_projectile_speed": "Prędkość pocisku łuku",
-	"attribute.puffish_attributes.crossbow_projectile_speed": "Prędkość pocisku kuszy"
+	"attribute.puffish_attributes.crossbow_projectile_speed": "Prędkość pocisku kuszy",
+	"attribute.puffish_attributes.experience": "Doświadczenie"
 }
