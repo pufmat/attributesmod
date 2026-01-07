@@ -2,6 +2,8 @@ package net.puffish.attributesmod.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.block.BlockState;
@@ -18,6 +20,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = PlayerEntity.class, priority = 1100)
 public abstract class PlayerEntityMixin {
@@ -33,6 +36,7 @@ public abstract class PlayerEntityMixin {
 				.add(PuffishAttributes.STAMINA)
 				.add(PuffishAttributes.FORTUNE)
 				.add(PuffishAttributes.MINING_SPEED)
+				.add(PuffishAttributes.BREAKING_SPEED)
 				.add(PuffishAttributes.PICKAXE_SPEED)
 				.add(PuffishAttributes.AXE_SPEED)
 				.add(PuffishAttributes.SHOVEL_SPEED)
@@ -119,5 +123,22 @@ public abstract class PlayerEntityMixin {
 		return dm.applyTo(speed);
 	}
 
+	@Inject(
+			method = {
+					"getBlockBreakingSpeed", // Fabric
+					"getDestroySpeed" // NeoForge
+			},
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/entity/effect/StatusEffectUtil;hasHaste(Lnet/minecraft/entity/LivingEntity;)Z"
+			)
+	)
+	private void injectAtGetBlockBreakingSpeed(CallbackInfoReturnable<Float> cir, @Local LocalFloatRef speed) {
+		var player = (PlayerEntity) (Object) this;
+
+		speed.set(DynamicModification.create()
+				.withPositive(PuffishAttributes.BREAKING_SPEED, player)
+				.applyTo(speed.get()));
+	}
 
 }
