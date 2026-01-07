@@ -15,6 +15,7 @@
 	"attribute.puffish_attributes.melee_resistance": "Odporność w zwarciu",
 	"attribute.puffish_attributes.ranged_resistance": "Odporność dystansowa",
 	"attribute.puffish_attributes.mining_speed": "Prędkość kopania",
+	"attribute.puffish_attributes.breaking_speed": "Prędkość niszczenia",
 	"attribute.puffish_attributes.pickaxe_speed": "Prędkość kilofa",
 	"attribute.puffish_attributes.axe_speed": "Prędkość siekiery",
 	"attribute.puffish_attributes.shovel_speed": "Prędkość łopaty",

@@ -14,6 +14,7 @@
 		"puffish_attributes:magic_resistance",
 		"puffish_attributes:melee_resistance",
 		"puffish_attributes:ranged_resistance",
+		"puffish_attributes:breaking_speed",
 		"puffish_attributes:mining_speed",
 		"puffish_attributes:pickaxe_speed",
 		"puffish_attributes:axe_speed",
