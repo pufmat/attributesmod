@@ -15,6 +15,7 @@
 	"attribute.puffish_attributes.melee_resistance": "Melee Resistance",
 	"attribute.puffish_attributes.ranged_resistance": "Ranged Resistance",
 	"attribute.puffish_attributes.mining_speed": "Mining Speed",
+	"attribute.puffish_attributes.breaking_speed": "Breaking Speed",
 	"attribute.puffish_attributes.pickaxe_speed": "Pickaxe Speed",
 	"attribute.puffish_attributes.axe_speed": "Axe Speed",
 	"attribute.puffish_attributes.shovel_speed": "Shovel Speed",
