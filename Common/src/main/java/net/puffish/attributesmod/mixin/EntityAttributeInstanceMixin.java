@@ -59,7 +59,8 @@ public class EntityAttributeInstanceMixin {
 					value = "FIELD",
 					target = "Lnet/minecraft/entity/attribute/EntityAttributeInstance;baseValue:D",
 					opcode = Opcodes.GETFIELD
-			)
+			),
+			require = 0
 	)
 	private double modifyExpressionValueAtBaseValue(double original) {
 		return type.value() instanceof DynamicEntityAttribute ? 0 : original;
