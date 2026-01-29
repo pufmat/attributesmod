@@ -21,6 +21,7 @@
 	"attribute.puffish_attributes.shovel_speed": "Prędkość łopaty",
 	"attribute.puffish_attributes.sprinting_speed": "Prędkość biegania",
 	"attribute.puffish_attributes.mount_speed": "Prędkość jazdy",
+	"attribute.puffish_attributes.consuming_speed": "Prędkość jedzenia",
 	"attribute.puffish_attributes.knockback": "Odrzut",
 	"attribute.puffish_attributes.repair_cost": "Koszt naprawy",
 	"attribute.puffish_attributes.armor_shred": "Osłabienie zbroi",

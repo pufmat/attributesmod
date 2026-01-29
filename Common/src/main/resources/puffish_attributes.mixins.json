@@ -13,6 +13,7 @@
 		"EntityAttributeInstanceMixin",
 		"ExperienceOrbEntityMixin",
 		"HungerManagerMixin",
+		"ItemMixin",
 		"LivingEntityMixin",
 		"PlayerEntityMixin",
 		"PlayerInventoryMixin",
