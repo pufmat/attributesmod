@@ -11,6 +11,7 @@ import net.minecraft.entity.Tameable;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.AxeItem;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.MaceItem;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.TridentItem;
@@ -140,6 +141,22 @@ public abstract class LivingEntityMixin {
 		}
 
 		return original.call(damageDealt, protection);
+	}
+
+	@ModifyExpressionValue(
+			method = "travelControlled",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/entity/LivingEntity;getSaddledSpeed(Lnet/minecraft/entity/player/PlayerEntity;)F"
+			)
+	)
+	private float modifyExpressionValueAtGetSaddledSpeed(
+			float speed,
+			@Local(argsOnly = true) PlayerEntity controllingPlayer
+	) {
+		return DynamicModification.create()
+				.withPositive(PuffishAttributes.MOUNT_SPEED, controllingPlayer)
+				.applyTo(speed);
 	}
 
 	@ModifyVariable(
