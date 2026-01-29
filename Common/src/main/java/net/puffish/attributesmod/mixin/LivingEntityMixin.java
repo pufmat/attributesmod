@@ -135,6 +135,19 @@ public abstract class LivingEntityMixin {
 		return original.call(damageDealt, protection);
 	}
 
+	@ModifyReturnValue(
+			method = "getMovementSpeed",
+			at = @At("RETURN")
+	)
+	private float modifyReturnValueAtGetMovementSpeed(float speed) {
+		if (((LivingEntity) (Object) this).getPrimaryPassenger() instanceof LivingEntity passenger) {
+			return DynamicModification.create()
+					.withPositive(PuffishAttributes.MOUNT_SPEED, passenger)
+					.applyTo(speed);
+		}
+		return speed;
+	}
+
 	@ModifyVariable(
 			method = "heal",
 			at = @At("HEAD"),
