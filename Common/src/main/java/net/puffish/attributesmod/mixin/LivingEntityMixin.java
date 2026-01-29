@@ -51,6 +51,7 @@ public abstract class LivingEntityMixin {
 				.add(PuffishAttributes.MAGIC_RESISTANCE_SHRED)
 				.add(PuffishAttributes.MELEE_RESISTANCE_SHRED)
 				.add(PuffishAttributes.RANGED_RESISTANCE_SHRED)
+				.add(PuffishAttributes.DAMAGE_REFLECTION)
 				.add(PuffishAttributes.STEALTH)
 				.add(PuffishAttributes.LIFE_STEAL)
 				.add(PuffishAttributes.FALL_REDUCTION)
