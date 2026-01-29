@@ -98,6 +98,16 @@ public class DynamicModificationImpl implements DynamicModification {
 	}
 
 	@Override
+	public double applyToReciprocal(double value) {
+		return 1.0 / applyTo(1.0 / value);
+	}
+
+	@Override
+	public float applyToReciprocal(float value) {
+		return (float) applyToReciprocal((double) value);
+	}
+
+	@Override
 	public double relativeTo(double initial) {
 		return applyTo(initial) - initial;
 	}
