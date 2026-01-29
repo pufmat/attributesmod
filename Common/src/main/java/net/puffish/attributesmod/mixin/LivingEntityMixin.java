@@ -137,6 +137,22 @@ public abstract class LivingEntityMixin {
 		return original.call(damageDealt, protection);
 	}
 
+	@ModifyExpressionValue(
+			method = "travelControlled",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/entity/LivingEntity;getSaddledSpeed(Lnet/minecraft/entity/LivingEntity;)F"
+			)
+	)
+	private float modifyExpressionValueAtGetSaddledSpeed(
+			float speed,
+			@Local(argsOnly = true) LivingEntity controllingPassenger
+	) {
+		return DynamicModification.create()
+				.withPositive(PuffishAttributes.MOUNT_SPEED, controllingPassenger)
+				.applyTo(speed);
+	}
+
 	@ModifyVariable(
 			method = "heal",
 			at = @At("HEAD"),
