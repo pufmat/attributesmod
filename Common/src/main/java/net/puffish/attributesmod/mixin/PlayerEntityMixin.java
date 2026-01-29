@@ -38,6 +38,8 @@ public abstract class PlayerEntityMixin {
 				.add(PuffishAttributes.AXE_SPEED)
 				.add(PuffishAttributes.SHOVEL_SPEED)
 				.add(PuffishAttributes.SPRINTING_SPEED)
+				.add(PuffishAttributes.MOUNT_SPEED)
+				.add(PuffishAttributes.KNOCKBACK)
 				.add(PuffishAttributes.REPAIR_COST)
 				.add(PuffishAttributes.NATURAL_REGENERATION)
 				.add(PuffishAttributes.TAMED_DAMAGE)
