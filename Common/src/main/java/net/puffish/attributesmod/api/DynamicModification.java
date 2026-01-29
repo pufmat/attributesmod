@@ -16,6 +16,9 @@ public interface DynamicModification {
 	double applyTo(double value);
 	float applyTo(float value);
 
+	double applyToReciprocal(double value);
+	float applyToReciprocal(float value);
+
 	double relativeTo(double value);
 	float relativeTo(float value);
 }
