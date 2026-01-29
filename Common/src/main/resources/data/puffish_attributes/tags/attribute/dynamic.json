@@ -21,6 +21,7 @@
 		"puffish_attributes:shovel_speed",
 		"puffish_attributes:sprinting_speed",
 		"puffish_attributes:mount_speed",
+		"puffish_attributes:consuming_speed",
 		"puffish_attributes:knockback",
 		"puffish_attributes:repair_cost",
 		"puffish_attributes:armor_shred",

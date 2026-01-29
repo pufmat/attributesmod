@@ -11,6 +11,7 @@ import net.minecraft.entity.Tameable;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.TridentItem;
 import net.puffish.attributesmod.api.DynamicModification;
@@ -248,5 +249,22 @@ public abstract class LivingEntityMixin {
 		}
 
 		return Math.max(0.0f, damage - resistance);
+	}
+
+	@WrapOperation(
+			method = "setCurrentHand",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/item/ItemStack;getMaxUseTime()I"
+			)
+	)
+	private int wrapOperationAtGetMaxUseTime(ItemStack itemStack, Operation<Integer> original) {
+		var ticks = original.call(itemStack);
+		if (itemStack.isFood()) {
+			return Math.max(1, Math.round(DynamicModification.create()
+					.withPositive(PuffishAttributes.CONSUMING_SPEED, ((LivingEntity) (Object) this))
+					.applyToReciprocal(ticks)));
+		}
+		return ticks;
 	}
 }
