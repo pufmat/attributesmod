@@ -1,7 +1,7 @@
 import com.google.gson.Gson
 
 plugins {
-    id("dev.architectury.loom")
+    id("net.fabricmc.fabric-loom")
     id("checkstyle")
 }
 
@@ -18,7 +18,6 @@ java {
 
 dependencies {
     minecraft("com.mojang:minecraft:${project.properties["minecraft_version"]}")
-    mappings(loom.officialMojangMappings())
 
     compileOnly("net.fabricmc:sponge-mixin:${project.properties["mixin_version"]}")
     compileOnly("io.github.llamalad7:mixinextras-common:${project.properties["mixinextras_version"]}")
@@ -30,10 +29,6 @@ sourceSets.main {
 
 tasks.jar {
     from(project.rootDir.resolve("LICENSE.txt"))
-
-    manifest {
-        attributes["Fabric-Loom-Remap"] = "true"
-    }
 }
 
 tasks.register<Sync>("generateAttributes") {

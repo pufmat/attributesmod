@@ -14,7 +14,7 @@ public class DeferredSetup {
 		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 
-	public static Attribute createClampedAttribute(Identifier id, double fallback, double min, double max) {
+	public static Attribute createRangedAttribute(Identifier id, double fallback, double min, double max) {
 		return new RangedAttribute(
 				id.toLanguageKey("attribute"),
 				fallback,

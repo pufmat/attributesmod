@@ -160,7 +160,7 @@ public class AttributesMod {
 
 	@Deprecated
 	public static Attribute createClampedAttribute(Identifier id, double fallback, double min, double max) {
-		return DeferredSetup.createClampedAttribute(id, fallback, min, max);
+		return DeferredSetup.createRangedAttribute(id, fallback, min, max);
 	}
 
 	@Deprecated
