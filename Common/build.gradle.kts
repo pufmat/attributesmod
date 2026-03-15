@@ -18,7 +18,7 @@ java {
 
 dependencies {
     minecraft("com.mojang:minecraft:${project.properties["minecraft_version"]}")
-    mappings("net.fabricmc:yarn:${project.properties["yarn_mappings"]}:v2")
+    mappings(loom.officialMojangMappings())
 
     compileOnly("net.fabricmc:sponge-mixin:${project.properties["mixin_version"]}")
     compileOnly("io.github.llamalad7:mixinextras-common:${project.properties["mixinextras_version"]}")

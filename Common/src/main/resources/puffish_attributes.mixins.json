@@ -4,19 +4,19 @@
 	"package": "net.puffish.attributesmod.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"AnvilScreenHandlerMixin",
-		"ApplyBonusLootFunctionMixin",
+		"AnvilMenuMixin",
+		"ApplyBonusCountMixin",
+		"AttributeInstanceInvoker",
+		"AttributeInstanceMixin",
 		"BowItemMixin",
+		"CombatTrackerMixin",
 		"CrossbowItemMixin",
-		"DamageTrackerMixin",
-		"EntityAttributeInstanceInvoker",
-		"EntityAttributeInstanceMixin",
-		"ExperienceOrbEntityMixin",
-		"HungerManagerMixin",
+		"ExperienceOrbMixin",
+		"FoodDataMixin",
 		"ItemMixin",
 		"LivingEntityMixin",
-		"PlayerEntityMixin",
-		"TargetPredicateMixin"
+		"PlayerMixin",
+		"TargetingConditionsMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

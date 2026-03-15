@@ -1,34 +1,34 @@
 package net.puffish.attributesmod.util;
 
-import net.minecraft.entity.attribute.ClampedEntityAttribute;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
-import net.puffish.attributesmod.api.DynamicEntityAttribute;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.RangedAttribute;
+import net.puffish.attributesmod.api.DynamicAttribute;
 
 public class DeferredSetup {
 	public static final String MOD_ID = "puffish_attributes";
 
 	public static Identifier createIdentifier(String path) {
-		return Identifier.of(MOD_ID, path);
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 
-	public static EntityAttribute createClampedAttribute(Identifier id, double fallback, double min, double max) {
-		return new ClampedEntityAttribute(
-				id.toTranslationKey("attribute"),
+	public static Attribute createClampedAttribute(Identifier id, double fallback, double min, double max) {
+		return new RangedAttribute(
+				id.toLanguageKey("attribute"),
 				fallback,
 				min,
 				max
 		);
 	}
 
-	public static EntityAttribute createDynamicAttribute(Identifier id) {
-		return DynamicEntityAttribute.create(id);
+	public static Attribute createDynamicAttribute(Identifier id) {
+		return DynamicAttribute.create(id);
 	}
 
-	public static RegistryEntry<EntityAttribute> registerAttribute(Identifier id, EntityAttribute attribute) {
-		return Platform.INSTANCE.registerReference(Registries.ATTRIBUTE, id, attribute);
+	public static Holder<Attribute> registerAttribute(Identifier id, Attribute attribute) {
+		return Platform.INSTANCE.registerForHolder(BuiltInRegistries.ATTRIBUTE, id, attribute);
 	}
 
 }

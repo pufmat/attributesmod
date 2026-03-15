@@ -6,16 +6,16 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Tameable;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.MaceItem;
-import net.minecraft.item.TridentItem;
-import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.OwnableEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.MaceItem;
+import net.minecraft.world.item.TridentItem;
 import net.puffish.attributesmod.api.DynamicModification;
 import net.puffish.attributesmod.api.PuffishAttributes;
 import net.puffish.attributesmod.util.DamageKind;
@@ -28,9 +28,9 @@ public abstract class LivingEntityMixin {
 
 	@ModifyExpressionValue(
 			method = "createLivingAttributes",
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/attribute/DefaultAttributeContainer;builder()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;")
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier;builder()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;")
 	)
-	private static DefaultAttributeContainer.Builder modifyExpressionValueAtBuilder(DefaultAttributeContainer.Builder builder) {
+	private static AttributeSupplier.Builder modifyExpressionValueAtBuilder(AttributeSupplier.Builder builder) {
 		return builder
 				.add(PuffishAttributes.MAGIC_DAMAGE)
 				.add(PuffishAttributes.MELEE_DAMAGE)
@@ -62,7 +62,7 @@ public abstract class LivingEntityMixin {
 	}
 
 	@ModifyReturnValue(
-			method = "getAttackKnockbackAgainst",
+			method = "getKnockback",
 			at = @At("RETURN")
 	)
 	private float modifyReturnValueAtGetAttackKnockbackAgainst(float knockback) {
@@ -72,25 +72,25 @@ public abstract class LivingEntityMixin {
 	}
 
 	@ModifyVariable(
-			method = "damage",
+			method = "hurtServer",
 			at = @At("HEAD"),
 			argsOnly = true,
 			ordinal = 0
 	)
-	private float modifyVariableAtDamage(float damage, ServerWorld world, DamageSource source) {
+	private float modifyVariableAtDamage(float damage, ServerLevel world, DamageSource source) {
 		if (damage < 0) {
 			return damage;
 		}
 
-		if (source.getAttacker() instanceof LivingEntity attacker) {
+		if (source.getEntity() instanceof LivingEntity attacker) {
 			var dm = DynamicModification.create();
 
-			var itemStack = attacker.getMainHandStack();
+			var itemStack = attacker.getMainHandItem();
 			var item = itemStack.getItem();
-			if (itemStack.isIn(ItemTags.SWORDS)) {
+			if (itemStack.is(ItemTags.SWORDS)) {
 				dm.withPositive(PuffishAttributes.SWORD_DAMAGE, attacker);
 			}
-			if (itemStack.isIn(ItemTags.AXES)) {
+			if (itemStack.is(ItemTags.AXES)) {
 				dm.withPositive(PuffishAttributes.AXE_DAMAGE, attacker);
 			}
 			if (item instanceof TridentItem) {
@@ -112,7 +112,7 @@ public abstract class LivingEntityMixin {
 				}
 			}
 
-			if (attacker instanceof Tameable tameable) {
+			if (attacker instanceof OwnableEntity tameable) {
 				var owner = tameable.getOwner();
 				if (owner != null) {
 					dm.withPositive(PuffishAttributes.TAMED_DAMAGE, owner);
@@ -126,11 +126,11 @@ public abstract class LivingEntityMixin {
 	}
 
 	@WrapOperation(
-			method = "applyArmorToDamage",
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/DamageUtil;getDamageLeft(Lnet/minecraft/entity/LivingEntity;FLnet/minecraft/entity/damage/DamageSource;FF)F")
+			method = "getDamageAfterArmorAbsorb",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterAbsorb(Lnet/minecraft/world/entity/LivingEntity;FLnet/minecraft/world/damagesource/DamageSource;FF)F")
 	)
 	private float wrapOperationAtApplyArmorToDamage(LivingEntity entity, float damage, DamageSource source, float armor, float toughness, Operation<Float> operation) {
-		if (source.getAttacker() instanceof LivingEntity attacker) {
+		if (source.getEntity() instanceof LivingEntity attacker) {
 			armor = Math.max(0.0f, DynamicModification.create()
 					.withNegative(PuffishAttributes.ARMOR_SHRED, attacker)
 					.applyTo(armor));
@@ -143,11 +143,11 @@ public abstract class LivingEntityMixin {
 	}
 
 	@WrapOperation(
-			method = "modifyAppliedDamage",
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/DamageUtil;getInflictedDamage(FF)F")
+			method = "getDamageAfterMagicAbsorb",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterMagicAbsorb(FF)F")
 	)
 	private float wrapOperationAtModifyAppliedDamage(float damageDealt, float protection, Operation<Float> original, @Local(argsOnly = true) DamageSource source) {
-		if (source.getAttacker() instanceof LivingEntity attacker) {
+		if (source.getEntity() instanceof LivingEntity attacker) {
 			protection = Math.max(0.0f, DynamicModification.create()
 					.withNegative(PuffishAttributes.PROTECTION_SHRED, attacker)
 					.applyTo(protection));
@@ -157,15 +157,15 @@ public abstract class LivingEntityMixin {
 	}
 
 	@ModifyExpressionValue(
-			method = "travelControlled",
+			method = "travelRidden",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/entity/LivingEntity;getSaddledSpeed(Lnet/minecraft/entity/player/PlayerEntity;)F"
+					target = "Lnet/minecraft/world/entity/LivingEntity;getRiddenSpeed(Lnet/minecraft/world/entity/player/Player;)F"
 			)
 	)
 	private float modifyExpressionValueAtGetSaddledSpeed(
 			float speed,
-			@Local(argsOnly = true) PlayerEntity controllingPlayer
+			@Local(argsOnly = true) Player controllingPlayer
 	) {
 		return DynamicModification.create()
 				.withPositive(PuffishAttributes.MOUNT_SPEED, controllingPlayer)
@@ -189,7 +189,7 @@ public abstract class LivingEntityMixin {
 	}
 
 	@ModifyReturnValue(
-			method = "getJumpVelocity",
+			method = "getJumpPower",
 			at = @At("RETURN")
 	)
 	private float injectAtGetJumpVelocity(float jump) {
@@ -199,7 +199,7 @@ public abstract class LivingEntityMixin {
 	}
 
 	@ModifyVariable(
-			method = "computeFallDamage",
+			method = "calculateFallDamage",
 			at = @At("HEAD"),
 			argsOnly = true,
 			ordinal = 0
@@ -214,12 +214,12 @@ public abstract class LivingEntityMixin {
 	}
 
 	@WrapMethod(
-			method = "applyArmorToDamage"
+			method = "getDamageAfterArmorAbsorb"
 	)
 	private float wrapMethodApplyArmorToDamage(DamageSource source, float amount, Operation<Float> original) {
 		var damage = original.call(source, amount);
 
-		if (source.isIn(DamageTypeTags.BYPASSES_EFFECTS)) {
+		if (source.is(DamageTypeTags.BYPASSES_EFFECTS)) {
 			return damage;
 		}
 		if (damage > Float.MAX_VALUE / 3.0f) {
@@ -242,7 +242,7 @@ public abstract class LivingEntityMixin {
 			}
 		}
 
-		if (entity instanceof Tameable tameable) {
+		if (entity instanceof OwnableEntity tameable) {
 			var owner = tameable.getOwner();
 			if (owner != null) {
 				dmResistance.withPositive(PuffishAttributes.TAMED_RESISTANCE, owner);
@@ -251,7 +251,7 @@ public abstract class LivingEntityMixin {
 
 		var resistance = dmResistance.relativeTo(damage);
 
-		if (source.getAttacker() instanceof LivingEntity attacker) {
+		if (source.getEntity() instanceof LivingEntity attacker) {
 			var dmShred = DynamicModification.create();
 			dmShred.withNegative(PuffishAttributes.RESISTANCE_SHRED, attacker);
 			if (kind.isMagic()) {

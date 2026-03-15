@@ -1,8 +1,8 @@
 package net.puffish.attributesmod.api;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.core.Holder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.puffish.attributesmod.util.DynamicModificationImpl;
 
 public interface DynamicModification {
@@ -10,8 +10,8 @@ public interface DynamicModification {
 		return new DynamicModificationImpl();
 	}
 
-	DynamicModification withPositive(RegistryEntry<EntityAttribute> attribute, LivingEntity entity);
-	DynamicModification withNegative(RegistryEntry<EntityAttribute> attribute, LivingEntity entity);
+	DynamicModification withPositive(Holder<Attribute> attribute, LivingEntity entity);
+	DynamicModification withNegative(Holder<Attribute> attribute, LivingEntity entity);
 
 	double applyTo(double value);
 	float applyTo(float value);

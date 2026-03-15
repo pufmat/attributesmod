@@ -1,39 +1,39 @@
 package net.puffish.attributesmod.util;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.puffish.attributesmod.api.DynamicEntityAttribute;
+import net.minecraft.core.Holder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.puffish.attributesmod.api.DynamicAttribute;
 import net.puffish.attributesmod.api.DynamicModification;
-import net.puffish.attributesmod.mixin.EntityAttributeInstanceInvoker;
+import net.puffish.attributesmod.mixin.AttributeInstanceInvoker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DynamicModificationImpl implements DynamicModification {
-	private final List<Signed<EntityAttributeInstance>> attributes = new ArrayList<>();
+	private final List<Signed<AttributeInstance>> attributes = new ArrayList<>();
 
 	@Override
-	public DynamicModification withPositive(RegistryEntry<EntityAttribute> attribute, LivingEntity entity) {
+	public DynamicModification withPositive(Holder<Attribute> attribute, LivingEntity entity) {
 		return with(Sign.POSITIVE, attribute, entity);
 	}
 
 	@Override
-	public DynamicModification withNegative(RegistryEntry<EntityAttribute> attribute, LivingEntity entity) {
+	public DynamicModification withNegative(Holder<Attribute> attribute, LivingEntity entity) {
 		return with(Sign.NEGATIVE, attribute, entity);
 	}
 
-	public DynamicModification with(Sign sign, RegistryEntry<EntityAttribute> attribute, LivingEntity entity) {
-		if (!(attribute.value() instanceof DynamicEntityAttribute)) {
+	public DynamicModification with(Sign sign, Holder<Attribute> attribute, LivingEntity entity) {
+		if (!(attribute.value() instanceof DynamicAttribute)) {
 			throw new IllegalArgumentException();
 		}
 
-		return with(sign.wrap(entity.getAttributeInstance(attribute)));
+		return with(sign.wrap(entity.getAttribute(attribute)));
 	}
 
-	public DynamicModification with(Signed<EntityAttributeInstance> signed) {
+	public DynamicModification with(Signed<AttributeInstance> signed) {
 		attributes.add(signed);
 		return this;
 	}
@@ -44,12 +44,12 @@ public class DynamicModificationImpl implements DynamicModification {
 			if (signedAttribute.value() == null) {
 				continue;
 			}
-			for (var modifier : ((EntityAttributeInstanceInvoker) signedAttribute.value())
-					.invokeGetModifiersByOperation(EntityAttributeModifier.Operation.ADD_VALUE)
+			for (var modifier : ((AttributeInstanceInvoker) signedAttribute.value())
+					.invokeGetModifiersByOperation(AttributeModifier.Operation.ADD_VALUE)
 			) {
 				switch (signedAttribute.sign()) {
-					case POSITIVE -> initial += modifier.value();
-					case NEGATIVE -> initial -= modifier.value();
+					case POSITIVE -> initial += modifier.amount();
+					case NEGATIVE -> initial -= modifier.amount();
 					default -> throw new IllegalStateException();
 				}
 			}
@@ -59,12 +59,12 @@ public class DynamicModificationImpl implements DynamicModification {
 			if (signedAttribute.value() == null) {
 				continue;
 			}
-			for (var modifier : ((EntityAttributeInstanceInvoker) signedAttribute.value())
-					.invokeGetModifiersByOperation(EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
+			for (var modifier : ((AttributeInstanceInvoker) signedAttribute.value())
+					.invokeGetModifiersByOperation(AttributeModifier.Operation.ADD_MULTIPLIED_BASE)
 			) {
 				switch (signedAttribute.sign()) {
-					case POSITIVE -> result += initial * modifier.value();
-					case NEGATIVE -> result -= initial * modifier.value();
+					case POSITIVE -> result += initial * modifier.amount();
+					case NEGATIVE -> result -= initial * modifier.amount();
 					default -> throw new IllegalStateException();
 				}
 			}
@@ -73,12 +73,12 @@ public class DynamicModificationImpl implements DynamicModification {
 			if (signedAttribute.value() == null) {
 				continue;
 			}
-			for (var modifier : ((EntityAttributeInstanceInvoker) signedAttribute.value())
-					.invokeGetModifiersByOperation(EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+			for (var modifier : ((AttributeInstanceInvoker) signedAttribute.value())
+					.invokeGetModifiersByOperation(AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
 			) {
 				switch (signedAttribute.sign()) {
-					case POSITIVE -> result *= 1.0 + modifier.value();
-					case NEGATIVE -> result *= 1.0 - modifier.value();
+					case POSITIVE -> result *= 1.0 + modifier.amount();
+					case NEGATIVE -> result *= 1.0 - modifier.amount();
 					default -> throw new IllegalStateException();
 				}
 			}
@@ -87,7 +87,7 @@ public class DynamicModificationImpl implements DynamicModification {
 			if (signedAttribute.value() == null) {
 				continue;
 			}
-			result = signedAttribute.value().getAttribute().value().clamp(result);
+			result = signedAttribute.value().getAttribute().value().sanitizeValue(result);
 		}
 		return result;
 	}

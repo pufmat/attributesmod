@@ -1,10 +1,10 @@
 package net.puffish.attributesmod.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.puffish.attributesmod.api.DynamicEntityAttribute;
+import net.minecraft.core.Holder;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.puffish.attributesmod.api.DynamicAttribute;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,11 +14,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(EntityAttributeInstance.class)
-public class EntityAttributeInstanceMixin {
+@Mixin(AttributeInstance.class)
+public class AttributeInstanceMixin {
 	@Shadow
 	@Final
-	private RegistryEntry<EntityAttribute> type;
+	private Holder<Attribute> attribute;
 
 	@Inject(
 			method = "getBaseValue",
@@ -26,18 +26,18 @@ public class EntityAttributeInstanceMixin {
 			cancellable = true
 	)
 	private void injectAtGetBaseValue(CallbackInfoReturnable<Double> cir) {
-		if (type.value() instanceof DynamicEntityAttribute) {
+		if (attribute.value() instanceof DynamicAttribute) {
 			cir.setReturnValue(Double.NaN);
 		}
 	}
 
 	@Inject(
-			method = "computeValue",
+			method = "calculateValue",
 			at = @At("HEAD"),
 			cancellable = true
 	)
 	private void injectAtComputeValue(CallbackInfoReturnable<Double> cir) {
-		if (type.value() instanceof DynamicEntityAttribute) {
+		if (attribute.value() instanceof DynamicAttribute) {
 			cir.setReturnValue(Double.NaN);
 		}
 	}
@@ -48,7 +48,7 @@ public class EntityAttributeInstanceMixin {
 			cancellable = true
 	)
 	private void injectAtSetBaseValue(double baseValue, CallbackInfo ci) {
-		if (type.value() instanceof DynamicEntityAttribute) {
+		if (attribute.value() instanceof DynamicAttribute) {
 			ci.cancel();
 		}
 	}
@@ -57,11 +57,11 @@ public class EntityAttributeInstanceMixin {
 			method = "pack",
 			at = @At(
 					value = "FIELD",
-					target = "Lnet/minecraft/entity/attribute/EntityAttributeInstance;baseValue:D",
+					target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;baseValue:D",
 					opcode = Opcodes.GETFIELD
 			)
 	)
 	private double modifyExpressionValueAtBaseValue(double original) {
-		return type.value() instanceof DynamicEntityAttribute ? 0 : original;
+		return attribute.value() instanceof DynamicAttribute ? 0 : original;
 	}
 }

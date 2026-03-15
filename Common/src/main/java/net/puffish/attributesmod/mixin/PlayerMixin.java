@@ -6,29 +6,28 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.puffish.attributesmod.api.DynamicModification;
 import net.puffish.attributesmod.api.PuffishAttributes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = PlayerEntity.class, priority = 1100)
-public abstract class PlayerEntityMixin {
+@Mixin(value = Player.class, priority = 1100)
+public abstract class PlayerMixin {
 
 	private static final double VANILLA_KNOCKBACK = 0.4;
 
 	@ModifyExpressionValue(
-			method = "createPlayerAttributes",
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;createLivingAttributes()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;")
+			method = "createAttributes",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;createLivingAttributes()Lnet/minecraft/world/entity/ai/attributes/AttributeSupplier$Builder;")
 	)
-	private static DefaultAttributeContainer.Builder modifyExpressionValueAtCreateLivingAttributes(DefaultAttributeContainer.Builder builder) {
+	private static AttributeSupplier.Builder modifyExpressionValueAtCreateLivingAttributes(AttributeSupplier.Builder builder) {
 		return builder
 				.add(PuffishAttributes.STAMINA)
 				.add(PuffishAttributes.FORTUNE)
@@ -48,9 +47,9 @@ public abstract class PlayerEntityMixin {
 				.add(PuffishAttributes.EXPERIENCE);
 	}
 
-	@ModifyReturnValue(method = "getMovementSpeed()F", at = @At("RETURN"))
-	private float injectAtGetMovementSpeed(float speed) {
-		var player = (PlayerEntity) (Object) this;
+	@ModifyReturnValue(method = "getSpeed()F", at = @At("RETURN"))
+	private float injectAtGetSpeed(float speed) {
+		var player = (Player) (Object) this;
 
 		if (!player.isSprinting()) {
 			return speed;
@@ -63,15 +62,15 @@ public abstract class PlayerEntityMixin {
 
 	@WrapOperation(
 			method = {
-					"getBlockBreakingSpeed", // Fabric
-					"getDestroySpeed" // NeoForge
+					"getDestroySpeed(Lnet/minecraft/world/level/block/state/BlockState;)F", // Fabric
+					"getDestroySpeed(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)F" // NeoForge
 			},
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/item/ItemStack;getMiningSpeedMultiplier(Lnet/minecraft/block/BlockState;)F"
+					target = "Lnet/minecraft/world/item/ItemStack;getDestroySpeed(Lnet/minecraft/world/level/block/state/BlockState;)F"
 			)
 	)
-	private float wrapOperationAtGetMiningSpeedMultiplier(ItemStack itemStack, BlockState blockState, Operation<Float> operation) {
+	private float wrapOperationAtGetDestroySpeed(ItemStack itemStack, BlockState blockState, Operation<Float> operation) {
 		var speed = operation.call(itemStack, blockState);
 
 		// This check is required to not break vanilla enchantments behavior
@@ -79,17 +78,17 @@ public abstract class PlayerEntityMixin {
 			return speed;
 		}
 
-		var player = (PlayerEntity) (Object) this;
+		var player = (Player) (Object) this;
 
 		var dm = DynamicModification.create();
 
-		if (itemStack.isIn(ItemTags.PICKAXES)) {
+		if (itemStack.is(ItemTags.PICKAXES)) {
 			dm.withPositive(PuffishAttributes.PICKAXE_SPEED, player);
 		}
-		if (itemStack.isIn(ItemTags.AXES)) {
+		if (itemStack.is(ItemTags.AXES)) {
 			dm.withPositive(PuffishAttributes.AXE_SPEED, player);
 		}
-		if (itemStack.isIn(ItemTags.SHOVELS)) {
+		if (itemStack.is(ItemTags.SHOVELS)) {
 			dm.withPositive(PuffishAttributes.SHOVEL_SPEED, player);
 		}
 		dm.withPositive(PuffishAttributes.MINING_SPEED, player);
@@ -99,16 +98,16 @@ public abstract class PlayerEntityMixin {
 
 	@Inject(
 			method = {
-					"getBlockBreakingSpeed", // Fabric
-					"getDestroySpeed" // NeoForge
+					"getDestroySpeed(Lnet/minecraft/world/level/block/state/BlockState;)F", // Fabric
+					"getDestroySpeed(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)F" // NeoForge
 			},
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/entity/effect/StatusEffectUtil;hasHaste(Lnet/minecraft/entity/LivingEntity;)Z"
+					target = "Lnet/minecraft/world/effect/MobEffectUtil;hasDigSpeed(Lnet/minecraft/world/entity/LivingEntity;)Z"
 			)
 	)
-	private void injectAtGetBlockBreakingSpeed(CallbackInfoReturnable<Float> cir, @Local LocalFloatRef speed) {
-		var player = (PlayerEntity) (Object) this;
+	private void injectAtHasDigSpeed(CallbackInfoReturnable<Float> cir, @Local LocalFloatRef speed) {
+		var player = (Player) (Object) this;
 
 		speed.set(DynamicModification.create()
 				.withPositive(PuffishAttributes.BREAKING_SPEED, player)

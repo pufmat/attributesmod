@@ -1,10 +1,10 @@
 package net.puffish.attributesmod.mixin;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageTracker;
-import net.minecraft.entity.damage.DamageTypes;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.CombatTracker;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.LivingEntity;
 import net.puffish.attributesmod.api.DynamicModification;
 import net.puffish.attributesmod.api.PuffishAttributes;
 import org.spongepowered.asm.mixin.Final;
@@ -14,19 +14,19 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(DamageTracker.class)
-public class DamageTrackerMixin {
+@Mixin(CombatTracker.class)
+public class CombatTrackerMixin {
 
 	@Shadow
 	@Final
-	private LivingEntity entity;
+	private LivingEntity mob;
 
 	@Inject(
-			method = "onDamage",
+			method = "recordDamage",
 			at = @At("HEAD")
 	)
 	private void injectAtAttack(DamageSource damageSource, float damage, CallbackInfo ci) {
-		if (damageSource.getAttacker() instanceof LivingEntity attacker) {
+		if (damageSource.getEntity() instanceof LivingEntity attacker) {
 			var lifeSteal = DynamicModification.create()
 					.withPositive(PuffishAttributes.LIFE_STEAL, attacker)
 					.relativeTo(damage);
@@ -35,13 +35,13 @@ public class DamageTrackerMixin {
 				attacker.heal(lifeSteal);
 			}
 
-			if (!damageSource.isOf(DamageTypes.THORNS)) {
+			if (!damageSource.is(DamageTypes.THORNS)) {
 				var reflection = DynamicModification.create()
-						.withPositive(PuffishAttributes.DAMAGE_REFLECTION, entity)
+						.withPositive(PuffishAttributes.DAMAGE_REFLECTION, mob)
 						.relativeTo(damage);
 
-				if (reflection > 0 && attacker.getEntityWorld() instanceof ServerWorld world) {
-					attacker.damage(world, world.getDamageSources().thorns(entity), reflection);
+				if (reflection > 0 && attacker.level() instanceof ServerLevel world) {
+					attacker.hurtServer(world, world.damageSources().thorns(mob), reflection);
 				}
 			}
 		}

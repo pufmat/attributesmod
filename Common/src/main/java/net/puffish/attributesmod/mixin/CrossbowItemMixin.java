@@ -1,8 +1,8 @@
 package net.puffish.attributesmod.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.CrossbowItem;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.CrossbowItem;
 import net.puffish.attributesmod.api.DynamicModification;
 import net.puffish.attributesmod.api.PuffishAttributes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,10 +13,10 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public abstract class CrossbowItemMixin {
 
 	@ModifyArg(
-			method = "shoot",
+			method = "shootProjectile",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/entity/projectile/ProjectileEntity;setVelocity(DDDFF)V"
+					target = "Lnet/minecraft/world/entity/projectile/Projectile;shoot(DDDFF)V"
 			),
 			index = 3
 	)
