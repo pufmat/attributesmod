@@ -27,6 +27,10 @@ public class CombatTrackerMixin {
 	)
 	private void injectAtAttack(DamageSource damageSource, float damage, CallbackInfo ci) {
 		if (damageSource.getEntity() instanceof LivingEntity attacker) {
+			if (((LivingEntityAccessor) attacker).isDead()) {
+				return;
+			}
+
 			var lifeSteal = DynamicModification.create()
 					.withPositive(PuffishAttributes.LIFE_STEAL, attacker)
 					.relativeTo(damage);
